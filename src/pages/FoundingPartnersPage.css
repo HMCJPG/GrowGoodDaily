@@ -1,0 +1,210 @@
+/* ===========================
+   Founding Partners Page
+   =========================== */
+
+.partners-intro {
+  margin-top: var(--space-xl);
+}
+
+.partners-intro__lead {
+  font-size: 1.25rem !important;
+  font-weight: 500;
+  color: var(--color-dark) !important;
+  line-height: 1.6;
+  margin-bottom: var(--space-lg);
+}
+
+.partners-intro p {
+  font-size: 1.08rem;
+  margin-bottom: var(--space-lg);
+}
+
+/* Ways to Support */
+.partners-ways__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-xl);
+}
+
+.partners-way {
+  background: var(--color-white);
+  padding: var(--space-2xl);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(45, 138, 78, 0.08);
+  transition: all var(--transition-base);
+}
+
+.partners-way:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-primary);
+}
+
+.partners-way__icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-lg);
+}
+
+.partners-way h3 {
+  font-size: 1.15rem;
+  margin-bottom: var(--space-sm);
+  color: var(--color-primary-dark);
+}
+
+.partners-way p {
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+/* Tiers */
+.partners-tiers__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-xl);
+  margin-top: var(--space-xl);
+}
+
+.partners-tier {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl) var(--space-xl);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  border: 2px solid rgba(45, 138, 78, 0.08);
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.partners-tier:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.partners-tier--featured {
+  border-color: var(--color-secondary);
+  box-shadow: var(--shadow-md);
+  position: relative;
+}
+
+.partners-tier--featured::before {
+  content: 'Most Impact';
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--color-secondary), var(--color-accent));
+  color: white;
+  padding: 0.3rem 1rem;
+  border-radius: var(--radius-xl);
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.partners-tier__icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-md);
+}
+
+.partners-tier__name {
+  font-size: 1.2rem;
+  margin-bottom: var(--space-xs);
+  color: var(--color-dark);
+}
+
+.partners-tier__amount {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--space-xl);
+}
+
+.partners-tier__benefits {
+  text-align: left;
+  margin-bottom: var(--space-xl);
+  flex-grow: 1;
+}
+
+.partners-tier__benefits li {
+  font-size: 0.88rem;
+  color: var(--color-text-light);
+  line-height: 1.5;
+  padding: var(--space-xs) 0;
+  padding-left: 1.2rem;
+  position: relative;
+}
+
+.partners-tier__benefits li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.partners-tier__btn {
+  width: 100%;
+}
+
+/* Goals */
+.partners-goals__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-xl);
+  margin-top: var(--space-3xl);
+}
+
+.partners-goal {
+  padding: var(--space-2xl) var(--space-lg);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+}
+
+.partners-goal:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-4px);
+}
+
+.partners-goal__num {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--color-secondary-light);
+  margin-bottom: var(--space-sm);
+}
+
+.partners-goal__label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 1024px) {
+  .partners-ways__grid,
+  .partners-tiers__grid,
+  .partners-goals__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .partners-ways__grid,
+  .partners-tiers__grid,
+  .partners-goals__grid {
+    grid-template-columns: 1fr;
+  }
+}

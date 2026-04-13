@@ -1,0 +1,300 @@
+import { Link } from 'react-router-dom';
+import { AnimatedSection } from '../components/AnimatedSection';
+import './HomePage.css';
+
+export default function HomePage() {
+  const differentiators = [
+    { icon: '🌱', title: 'Start Earlier', text: 'Help children build healthy money habits during their most impressionable years, when influence is strongest.' },
+    { icon: '🤝', title: 'Mobilize Older Youth', text: 'Engage teens as mentors and ambassadors, creating a powerful intergenerational learning loop.' },
+    { icon: '💡', title: 'Equip Everyday Influencers', text: 'Give parents, caregivers, teachers, and community leaders practical tools and resources.' },
+    { icon: '📣', title: 'Raise Awareness', text: 'Bring urgent attention to why earlier financial education matters for families and communities.' },
+    { icon: '💬', title: 'Make Money Talks Easier', text: 'Normalize and simplify conversations about money between adults and children.' },
+    { icon: '⭐', title: 'Reinforce Participation', text: 'Celebrate effort and engagement to keep families and communities coming back.' },
+    { icon: '🚀', title: 'Inspire Dreams', text: 'Connect financial habits to bigger life goals so children see saving as a path to their future.' },
+  ];
+
+  const steps = [
+    { num: '01', title: 'Children Build Habits Early', text: 'Age-appropriate tools help young children practice saving, sharing, and smart choices.', icon: '👶' },
+    { num: '02', title: 'Older Youth Teach, Mentor, and Lead', text: 'Teenagers gain workforce skills while mentoring younger children in financial basics.', icon: '🎓' },
+    { num: '03', title: 'Adults Get Practical Tools', text: 'Parents and educators receive resources that make money conversations easier to start.', icon: '👨‍👩‍👧' },
+    { num: '04', title: 'Communities Grow Stronger', text: 'A connected pipeline of opportunity strengthens families and neighborhoods.', icon: '🏘️' },
+  ];
+
+  const impactNumbers = [
+    { number: '$5M', label: 'Five-Year Vision' },
+    { number: '100K', label: 'Books & Curricula Given Away' },
+    { number: '10K', label: 'Classrooms & Youth Organizations Reached' },
+    { number: '100', label: 'Student Workforce Opportunities' },
+  ];
+
+  return (
+    <main className="home" id="home-page">
+      {/* Hero Section */}
+      <section className="hero" id="hero-section">
+        <div className="hero__bg">
+          <img src="/images/hero-banner.png" alt="Diverse children and families learning about financial education in a warm, sunlit community setting" />
+          <div className="hero__overlay"></div>
+        </div>
+        <div className="hero__content container">
+          <div className="hero__text">
+            <span className="hero__badge animate-fade-up">A New Nonprofit Vision</span>
+            <h1 className="hero__title animate-fade-up delay-1">
+              Financial education starts too late.<br />
+              <span className="hero__title-highlight">We're working to move it upstream.</span>
+            </h1>
+            <p className="hero__subtitle animate-fade-up delay-2">
+              Grow Good Daily is a new nonprofit vision designed to help children build healthy money habits earlier, engage older youth as mentors and ambassadors, and equip families, schools, and communities with tools that make money conversations easier to start.
+            </p>
+            <div className="btn-group animate-fade-up delay-3">
+              <Link to="/contact" className="btn btn--accent btn--lg" id="hero-cta-primary">
+                Join as an Early Supporter
+              </Link>
+              <Link to="/vision" className="btn btn--white btn--lg" id="hero-cta-secondary">
+                Read the Vision →
+              </Link>
+            </div>
+            <p className="hero__credibility animate-fade-up delay-4">
+              Built on a 25-year legacy of trusted financial education work
+            </p>
+          </div>
+        </div>
+        <div className="hero__scroll-indicator">
+          <div className="hero__scroll-dot"></div>
+        </div>
+      </section>
+
+      {/* Big Idea Section */}
+      <section className="section big-idea" id="big-idea-section">
+        <div className="container">
+          <AnimatedSection className="big-idea__content">
+            <span className="section__label">The Big Idea</span>
+            <h2 className="section__title">Why Grow Good Daily?</h2>
+            <div className="big-idea__grid">
+              <div className="big-idea__text">
+                <p className="big-idea__lead">
+                  Financial education often arrives after habits and attitudes have already begun to form.
+                </p>
+                <p>
+                  Grow Good Daily is being created to help families and communities start earlier, when influence is strongest and change can have lasting impact. By combining early childhood education, youth mentorship, and community resources, we aim to redesign the starting line for economic opportunity.
+                </p>
+              </div>
+              <div className="big-idea__image">
+                <img
+                  src="/images/early-education.png"
+                  alt="Illustration of a young child joyfully learning about saving money, surrounded by growing plants and warmth"
+                />
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* What Makes This Different */}
+      <section className="section section--alt differentiators" id="differentiators-section">
+        <div className="container">
+          <AnimatedSection className="text-center">
+            <span className="section__label">What Sets Us Apart</span>
+            <h2 className="section__title">What Makes This Different</h2>
+            <p className="section__subtitle">
+              Seven core principles guide our approach to creating lasting change in financial education.
+            </p>
+          </AnimatedSection>
+          <div className="differentiators__grid">
+            {differentiators.map((item, i) => (
+              <AnimatedSection key={i} className="card differentiators__card" delay={i * 0.08}>
+                <div className="card__icon">{item.icon}</div>
+                <h3 className="card__title">{item.title}</h3>
+                <p className="card__text">{item.text}</p>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How The Model Works */}
+      <section className="section model" id="model-section">
+        <div className="container">
+          <AnimatedSection className="text-center">
+            <span className="section__label">The Model</span>
+            <h2 className="section__title">How It Works</h2>
+            <p className="section__subtitle">
+              An intergenerational approach that connects children, youth, families, and communities.
+            </p>
+          </AnimatedSection>
+          <div className="model__steps">
+            {steps.map((step, i) => (
+              <AnimatedSection key={i} className="model__step" delay={i * 0.12}>
+                <div className="model__step-icon">{step.icon}</div>
+                <div className="model__step-num">{step.num}</div>
+                <h3 className="model__step-title">{step.title}</h3>
+                <p className="model__step-text">{step.text}</p>
+              </AnimatedSection>
+            ))}
+          </div>
+          <AnimatedSection className="text-center" delay={0.5}>
+            <Link to="/how-it-works" className="btn btn--primary" id="model-learn-more">
+              Learn More About Our Model →
+            </Link>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Why Now */}
+      <section className="section section--warm why-now" id="why-now-section">
+        <div className="container">
+          <AnimatedSection>
+            <div className="why-now__content">
+              <div className="why-now__text">
+                <span className="section__label">The Urgency</span>
+                <h2 className="section__title">Why Now?</h2>
+                <div className="why-now__points">
+                  <div className="why-now__point">
+                    <div className="why-now__point-icon">⚡</div>
+                    <p>Too many young people enter adulthood without strong money skills</p>
+                  </div>
+                  <div className="why-now__point">
+                    <div className="why-now__point-icon">🎯</div>
+                    <p>The most impressionable years are often missed</p>
+                  </div>
+                  <div className="why-now__point">
+                    <div className="why-now__point-icon">🔥</div>
+                    <p>Early financial education still lacks enough awareness and urgency</p>
+                  </div>
+                </div>
+              </div>
+              <div className="why-now__image">
+                <img
+                  src="/images/family-learning.png"
+                  alt="A family having a warm conversation about money and savings at home together"
+                />
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Credibility / Proof */}
+      <section className="section section--dark credibility" id="credibility-section">
+        <div className="container">
+          <AnimatedSection className="text-center">
+            <span className="section__label">Proven Foundation</span>
+            <h2 className="section__title">Built on 25 Years of Trusted Work</h2>
+            <p className="section__subtitle" style={{ color: 'rgba(255,255,255,0.75)' }}>
+              Grow Good Daily is not starting from scratch. It builds on a foundation of proven resources, established platforms, and decades of real-world impact.
+            </p>
+          </AnimatedSection>
+          <div className="credibility__grid">
+            <AnimatedSection className="credibility__item" delay={0.1}>
+              <div className="credibility__icon">🐰</div>
+              <h3>SammyRabbit.com</h3>
+              <p>An established platform helping children learn about money through stories, songs, and activities</p>
+            </AnimatedSection>
+            <AnimatedSection className="credibility__item" delay={0.2}>
+              <div className="credibility__icon">📚</div>
+              <h3>BedtimeMoneyHabits.com</h3>
+              <p>Tools and resources that help families make bedtime a moment for building lifelong financial skills</p>
+            </AnimatedSection>
+            <AnimatedSection className="credibility__item" delay={0.3}>
+              <div className="credibility__icon">🎯</div>
+              <h3>Existing Content Assets</h3>
+              <p>A library of proven educational content ready to be deployed at scale across schools and communities</p>
+            </AnimatedSection>
+            <AnimatedSection className="credibility__item" delay={0.4}>
+              <div className="credibility__icon">⚡</div>
+              <h3>Ready to Deploy</h3>
+              <p>Ability to quickly deploy proven resources and programming from day one of operations</p>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* Impact Numbers */}
+      <section className="section impact" id="impact-section">
+        <div className="container">
+          <AnimatedSection className="text-center">
+            <span className="section__label">The Vision</span>
+            <h2 className="section__title">Measurable Impact, Real Goals</h2>
+            <p className="section__subtitle">
+              Our five-year vision is ambitious, measurable, and grounded in a proven foundation.
+            </p>
+          </AnimatedSection>
+          <div className="impact__grid">
+            {impactNumbers.map((item, i) => (
+              <AnimatedSection key={i} className="impact__card" delay={i * 0.1}>
+                <span className="impact__number">{item.number}</span>
+                <span className="impact__label">{item.label}</span>
+              </AnimatedSection>
+            ))}
+          </div>
+          <AnimatedSection className="impact__extra text-center" delay={0.5}>
+            <p>Plus hundreds of thousands reached online through digital content and campaigns</p>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Promise */}
+      <section className="section promise" id="promise-section">
+        <div className="container container--narrow text-center">
+          <AnimatedSection>
+            <div className="promise__content">
+              <h2 className="promise__title">
+                We want to help redesign the starting line so more children grow up with healthy money habits, stronger confidence, and bigger futures.
+              </h2>
+              <div className="promise__benefits">
+                <span>Less fear around money</span>
+                <span>Better family conversations</span>
+                <span>More confidence</span>
+                <span>Healthier choices</span>
+                <span>Stronger futures</span>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Founding Partner CTA */}
+      <section className="section section--dark cta-section" id="founding-cta-section">
+        <div className="container container--narrow text-center">
+          <AnimatedSection>
+            <span className="section__label">Get Involved</span>
+            <h2 className="section__title">Become a Founding Supporter</h2>
+            <p className="section__subtitle" style={{ color: 'rgba(255,255,255,0.8)' }}>
+              Help launch a new model for earlier financial education, stronger families, youth leadership, and broader economic opportunity.
+            </p>
+            <div className="cta-section__options">
+              <Link to="/contact?interest=funding" className="cta-section__option" id="cta-fund">
+                <span className="cta-section__option-icon">💰</span>
+                <span className="cta-section__option-text">I want to fund</span>
+              </Link>
+              <Link to="/contact?interest=partnership" className="cta-section__option" id="cta-partner">
+                <span className="cta-section__option-icon">🤝</span>
+                <span className="cta-section__option-text">I want to partner</span>
+              </Link>
+              <Link to="/contact?interest=advisory" className="cta-section__option" id="cta-advise">
+                <span className="cta-section__option-icon">💡</span>
+                <span className="cta-section__option-text">I want to advise</span>
+              </Link>
+              <Link to="/contact?interest=updates" className="cta-section__option" id="cta-updates">
+                <span className="cta-section__option-icon">📩</span>
+                <span className="cta-section__option-text">I want updates</span>
+              </Link>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Transparency Note */}
+      <section className="section transparency" id="transparency-section">
+        <div className="container container--narrow text-center">
+          <AnimatedSection>
+            <div className="transparency__content">
+              <p className="transparency__text">
+                Grow Good Daily is in its formative stage. We are now sharing the vision, building early relationships, and inviting founding supporters to help shape and launch the work.
+              </p>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+    </main>
+  );
+}
