@@ -43,7 +43,7 @@ export default function HomePage() {
               <span className="hero__title-highlight">We're working to move it upstream.</span>
             </h1>
             <p className="hero__subtitle animate-fade-up delay-2">
-              Grow Good Daily is a new nonprofit vision designed to help children build healthy money habits earlier, engage older youth as mentors and ambassadors, and equip families, schools, and communities with tools that make money conversations easier to start.
+              Financial literacy is a superpower, and Grow Good Daily equips the next generation with the habits they need to thrive. Through peer mentorship and easy-to-use family tools, we’re breaking the silence around money. We focus our heart and resources on underserved neighborhoods, ensuring that where a child starts doesn't limit where they can go. Our mission is simple: turning early education into lifelong economic freedom.
             </p>
             <div className="btn-group animate-fade-up delay-3">
               <Link to="/contact" className="btn btn--accent btn--lg" id="hero-cta-primary">
@@ -54,7 +54,7 @@ export default function HomePage() {
               </Link>
             </div>
             <p className="hero__credibility animate-fade-up delay-4">
-              Built on a 25-year legacy of trusted financial education work
+              Bringing 25 years of trusted financial education to the next generation.
             </p>
           </div>
         </div>
@@ -72,10 +72,15 @@ export default function HomePage() {
             <div className="big-idea__grid">
               <div className="big-idea__text">
                 <p className="big-idea__lead">
-                  Financial education often arrives after habits and attitudes have already begun to form.
+                  Problem: The system is backwards, and it’s failing our children.
+                  <br></br>
+
+                  Solution: We're flipping the script.
                 </p>
                 <p>
-                  Grow Good Daily is being created to help families and communities start earlier, when influence is strongest and change can have lasting impact. By combining early childhood education, youth mentorship, and community resources, we aim to redesign the starting line for economic opportunity.
+                  For thirty years, the "high school strategy" for financial literacy has arrived too late to move the needle. By the time a student enters a classroom, their money mindsets are already set. Research shows these habits take root by age seven.
+
+                  Grow Good Daily flips the script. We close the gap between when habits form and when education begins. By moving financial education upstream, we ensure a child’s first experience with money is rooted in intention and confidence, rather than fear or scarcity. We aren’t just teaching math; we are redesigning the starting line for generational wealth.
                 </p>
               </div>
               <div className="big-idea__image">
