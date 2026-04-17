@@ -74,6 +74,7 @@ export default function HomePage() {
                 <p className="big-idea__lead">
                   Problem: The system is backwards, and it’s failing our children.
                   <br></br>
+                  <br></br>
 
                   Solution: We're flipping the script.
                 </p>
