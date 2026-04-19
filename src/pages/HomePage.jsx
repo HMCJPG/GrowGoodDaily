@@ -39,13 +39,15 @@ export default function HomePage() {
         </div>
         <div className="hero__content container">
           <div className="hero__text">
-
             <h1 className="hero__title animate-fade-up delay-1">
               Financial education starts too late.<br />
-              <span className="hero__title-highlight">We're working to move it upstream.</span>
+              <span className="hero__title-highlight">We're changing that.</span>
             </h1>
             <p className="hero__subtitle animate-fade-up delay-2">
-              Financial literacy is a superpower, and Grow Good Daily equips the next generation with the habits they need to thrive. Through peer mentorship and easy-to-use family tools, we’re breaking the silence around money. We focus our heart and resources on underserved neighborhoods, ensuring that where a child starts doesn't limit where they can go. Our mission is simple: turning early education into lifelong economic freedom.
+              Grow Good Daily is building a whole-community model that brings financial education to young people earlier — delivered through the people closest to them: parents, high school and college mentors, schools, and local enterprises all working toward the same goal. Because a lesson lands differently when it comes from someone who looks like you or loves you.
+            </p>
+            <p className="hero__subtitle animate-fade-up delay-2" style={{ marginTop: 'var(--space-md)' }}>
+              We focus our heart and prioritize resources on underserved communities, because where a child starts should never determine where they can go.
             </p>
             <div className="btn-group animate-fade-up delay-3">
               <Link to="/contact" className="btn btn--accent btn--lg" id="hero-cta-primary">
@@ -70,36 +72,20 @@ export default function HomePage() {
         <div className="container">
           <AnimatedSection className="big-idea__content">
             <span className="section__label">The Big Idea</span>
-            <h2 className="section__title">Why Grow Good Daily?</h2>
+            <h2 className="section__title">Why Grow Good Daily</h2>
             <div className="big-idea__grid">
               <div className="big-idea__text">
                 <p className="big-idea__lead">
-                  Problem: The system is backwards, and it’s failing our children.
-                  <br></br>
-                  <br></br>
-
-                  Solution: We're flipping the script.
+                  The system is backwards — and it's failing our children.
                 </p>
                 <p>
-                  For thirty years, the "high school strategy" for financial literacy has arrived too late to move the needle. By the time a student enters a classroom, their money mindsets are already set.
-
-                  <br></br>
-                  <br></br>
-
-
-                  This is crushing young people, especially from low-income or underserved families.
-
-                  <br></br>
-
-
-
-                  <br></br>
-
-
-
-                  Research shows these habits take root by age seven.
-
-                  Grow Good Daily flips the script. We close the gap between when habits form and when education begins. By moving financial education upstream, we ensure a child’s first experience with money is rooted in intention and confidence, rather than fear or scarcity. We aren’t just teaching math; we are redesigning the starting line for generational wealth.
+                  For thirty years, financial literacy has been centered on high school students — producing negligible impact. Research shows money habits take root by age seven. By the time a student sits down in a high school finance class, their relationship with money is already formed.
+                </p>
+                <p>
+                  Grow Good Daily closes that gap. We bring financial education upstream — to the years when it matters most — so a child's first experience with money is rooted in intention and confidence, not fear or scarcity.
+                </p>
+                <p className="big-idea__lead" style={{ marginTop: 'var(--space-lg)' }}>
+                  We aren't just teaching financial literacy. We're redesigning the starting line.
                 </p>
               </div>
               <div className="big-idea__image">
@@ -142,7 +128,7 @@ export default function HomePage() {
             <span className="section__label">The Model</span>
             <h2 className="section__title">How It Works</h2>
             <p className="section__subtitle">
-              An intergenerational approach that connects children, youth, families, schools, and communities.
+              Grow Good Daily uses a whole-community intergenerational model — engaging youth, parents, schools, and local enterprises together — so that financial education is reinforced everywhere a young person learns and grows, creating the consistent, long-term conditions real change requires.
             </p>
           </AnimatedSection>
           <div className="model__steps">
@@ -155,6 +141,12 @@ export default function HomePage() {
               </AnimatedSection>
             ))}
           </div>
+          <AnimatedSection className="model__quote text-center" delay={0.45}>
+            <blockquote className="model__blockquote">
+              <p>"In 26 years of this work, we've learned that when you involve everyone who impacts young children, you impact and change everyone — families, communities, the entire system."</p>
+              <cite>— Sam X Renick, Founder: Grow Good Daily, SammyRabbit.com, BedtimeMoneyHabits.com</cite>
+            </blockquote>
+          </AnimatedSection>
           <AnimatedSection className="text-center" delay={0.5}>
             <Link to="/how-it-works" className="btn btn--primary" id="model-learn-more">
               Learn More About Our Model →
@@ -416,24 +408,20 @@ export default function HomePage() {
             <span className="section__label">Get Involved</span>
             <h2 className="section__title">Become a Founding Supporter</h2>
             <p className="section__subtitle" style={{ color: 'rgba(255,255,255,0.8)' }}>
-              Help launch a new model for earlier financial education, stronger families, youth leadership, and broader economic opportunity.
+              Help launch a new model for financial education, stronger families, and youth leadership — building real economic independence for generations to come.
             </p>
             <div className="cta-section__options">
               <Link to="/contact?interest=funding" className="cta-section__option" id="cta-fund">
                 <span className="cta-section__option-icon">💰</span>
-                <span className="cta-section__option-text">I want to fund</span>
+                <span className="cta-section__option-text">Fund</span>
               </Link>
               <Link to="/contact?interest=partnership" className="cta-section__option" id="cta-partner">
                 <span className="cta-section__option-icon">🤝</span>
-                <span className="cta-section__option-text">I want to partner</span>
+                <span className="cta-section__option-text">Partner</span>
               </Link>
-              <Link to="/contact?interest=advisory" className="cta-section__option" id="cta-advise">
-                <span className="cta-section__option-icon">💡</span>
-                <span className="cta-section__option-text">I want to advise</span>
-              </Link>
-              <Link to="/contact?interest=updates" className="cta-section__option" id="cta-updates">
-                <span className="cta-section__option-icon">📩</span>
-                <span className="cta-section__option-text">I want updates</span>
+              <Link to="/contact?interest=volunteer" className="cta-section__option" id="cta-volunteer">
+                <span className="cta-section__option-icon">🙌</span>
+                <span className="cta-section__option-text">Volunteer</span>
               </Link>
             </div>
           </AnimatedSection>
@@ -446,7 +434,7 @@ export default function HomePage() {
           <AnimatedSection>
             <div className="transparency__content">
               <p className="transparency__text">
-                Grow Good Daily is in its formative stage. We are now sharing the vision, building early relationships, and inviting founding supporters to help shape and launch the work.
+                Grow Good Daily is in its earliest stage. The vision is set. Now we're looking to get the right people and enterprises "on the bus" in the "right roles" to help us launch it.
               </p>
             </div>
           </AnimatedSection>

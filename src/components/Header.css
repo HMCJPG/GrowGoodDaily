@@ -10,14 +10,13 @@
   z-index: 1000;
   padding: 1rem 0;
   transition: all var(--transition-base);
-  background: transparent;
-}
-
-.header--scrolled {
-  background: rgba(250, 253, 247, 0.95);
+  background: rgba(250, 253, 247, 1);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 2px 20px rgba(45, 138, 78, 0.08);
+}
+
+.header--scrolled {
   padding: 0.6rem 0;
 }
 
