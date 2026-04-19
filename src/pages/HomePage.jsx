@@ -4,19 +4,21 @@ import './HomePage.css';
 
 export default function HomePage() {
   const differentiators = [
-    { icon: '🌱', title: 'Start Earlier', text: 'Help children build healthy money habits during their most impressionable years, when influence is strongest.' },
+    { icon: '🌱', title: 'Start Earlier', text: 'Help children build healthy habits, attitudes, and feelings towards money during their most impressionable years, when influence is strongest.' },
     { icon: '🤝', title: 'Mobilize Older Youth', text: 'Engage teens as mentors and ambassadors, creating a powerful intergenerational learning loop.' },
     { icon: '💡', title: 'Equip Everyday Influencers', text: 'Give parents, caregivers, teachers, and community leaders practical tools and resources.' },
     { icon: '📣', title: 'Raise Awareness', text: 'Bring urgent attention to why earlier financial education matters for families and communities.' },
     { icon: '💬', title: 'Make Money Talks Easier', text: 'Normalize and simplify conversations about money between adults and children.' },
     { icon: '⭐', title: 'Reinforce Participation', text: 'Celebrate effort and engagement to keep families and communities coming back.' },
     { icon: '🚀', title: 'Inspire Dreams', text: 'Connect financial habits to bigger life goals so children see saving as a path to their future.' },
+    { icon: '🏛️', title: 'Wealth of Experience', text: 'Built on over 25 years of trusted, hands-on work in children\'s financial education — bringing proven strategies, deep expertise, and real-world credibility to every initiative.' },
+    { icon: '📈', title: 'Consistent Daily Growth', text: 'Good financial formation isn\'t built overnight. Small, intentional daily habits — saving a little, talking about money openly, making thoughtful choices — compound into lifelong economic strength and freedom.' },
   ];
 
   const steps = [
     { num: '01', title: 'Children Build Habits Early', text: 'Age-appropriate tools help young children practice saving, sharing, and smart choices.', icon: '👶' },
     { num: '02', title: 'Older Youth Teach, Mentor, and Lead', text: 'Teenagers gain workforce skills while mentoring younger children in financial basics.', icon: '🎓' },
-    { num: '03', title: 'Adults Get Practical Tools', text: 'Parents and educators receive resources that make money conversations easier to start.', icon: '👨‍👩‍👧' },
+    { num: '03', title: 'Parents and Teachers Get Practical Tools', text: 'Parents and educators receive resources that make money conversations easier to start.', icon: '👨‍👩‍👧' },
     { num: '04', title: 'Communities Grow Stronger', text: 'A connected pipeline of opportunity strengthens families and neighborhoods.', icon: '🏘️' },
   ];
 
@@ -37,7 +39,7 @@ export default function HomePage() {
         </div>
         <div className="hero__content container">
           <div className="hero__text">
-            <span className="hero__badge animate-fade-up">A New Nonprofit Vision</span>
+
             <h1 className="hero__title animate-fade-up delay-1">
               Financial education starts too late.<br />
               <span className="hero__title-highlight">We're working to move it upstream.</span>
@@ -79,7 +81,23 @@ export default function HomePage() {
                   Solution: We're flipping the script.
                 </p>
                 <p>
-                  For thirty years, the "high school strategy" for financial literacy has arrived too late to move the needle. By the time a student enters a classroom, their money mindsets are already set. Research shows these habits take root by age seven.
+                  For thirty years, the "high school strategy" for financial literacy has arrived too late to move the needle. By the time a student enters a classroom, their money mindsets are already set.
+
+                  <br></br>
+                  <br></br>
+
+
+                  This is crushing young people, especially from low-income or underserved families.
+
+                  <br></br>
+
+
+
+                  <br></br>
+
+
+
+                  Research shows these habits take root by age seven.
 
                   Grow Good Daily flips the script. We close the gap between when habits form and when education begins. By moving financial education upstream, we ensure a child’s first experience with money is rooted in intention and confidence, rather than fear or scarcity. We aren’t just teaching math; we are redesigning the starting line for generational wealth.
                 </p>
@@ -100,9 +118,9 @@ export default function HomePage() {
         <div className="container">
           <AnimatedSection className="text-center">
             <span className="section__label">What Sets Us Apart</span>
-            <h2 className="section__title">What Makes This Different</h2>
+            <h2 className="section__title">Our Unique Approach</h2>
             <p className="section__subtitle">
-              Seven core principles guide our approach to creating lasting change in financial education.
+              Nine core principles guide our approach to creating lasting change in financial education.
             </p>
           </AnimatedSection>
           <div className="differentiators__grid">
@@ -124,7 +142,7 @@ export default function HomePage() {
             <span className="section__label">The Model</span>
             <h2 className="section__title">How It Works</h2>
             <p className="section__subtitle">
-              An intergenerational approach that connects children, youth, families, and communities.
+              An intergenerational approach that connects children, youth, families, schools, and communities.
             </p>
           </AnimatedSection>
           <div className="model__steps">
@@ -155,12 +173,12 @@ export default function HomePage() {
                 <h2 className="section__title">Why Now?</h2>
                 <div className="why-now__points">
                   <div className="why-now__point">
-                    <div className="why-now__point-icon">⚡</div>
-                    <p>Too many young people enter adulthood without strong money skills</p>
+                    <div className="why-now__point-icon">🧑‍🧒</div>
+                    <p>Too many young people enter adulthood without strong money habits and skills</p>
                   </div>
                   <div className="why-now__point">
-                    <div className="why-now__point-icon">🎯</div>
-                    <p>The most impressionable years are often missed</p>
+                    <div className="why-now__point-icon">💵</div>
+                    <p>The most impressionable years are often missed, and the youth enter adulthood with unhealthy attitudes and feelings towards money</p>
                   </div>
                   <div className="why-now__point">
                     <div className="why-now__point-icon">🔥</div>
@@ -236,6 +254,139 @@ export default function HomePage() {
             <p>Plus hundreds of thousands reached online through digital content and campaigns</p>
           </AnimatedSection>
         </div>
+      </section>
+      {/* 5-Year Plan Timeline */}
+      <section className="section section--dark fiveyr" id="fiveyr-section">
+        <div className="container text-center">
+          <AnimatedSection>
+            <span className="section__label">The Roadmap</span>
+            <h2 className="section__title">Grow Good Daily — 5-Year Plan</h2>
+            <p className="fiveyr__tagline">
+              Redesigning the starting line for economic opportunity &nbsp;·&nbsp; Total vision: <strong>$5,000,000</strong>
+            </p>
+          </AnimatedSection>
+        </div>
+        <AnimatedSection delay={0.15}>
+          <div className="fiveyr__track-wrapper">
+            <div className="fiveyr__track" id="fiveyr-track">
+              {/* Year 1 */}
+              <div className="fiveyr__card fiveyr__card--y1">
+                <div className="fiveyr__card-top">
+                  <span className="fiveyr__year">Year 1</span>
+                  <span className="fiveyr__theme-badge">Foundation</span>
+                </div>
+                <h3 className="fiveyr__subtitle">Nonprofit formation &amp; operational readiness</h3>
+                <ul className="fiveyr__list">
+                  <li>Complete nonprofit formation and legal structure</li>
+                  <li>Establish operating infrastructure and leadership</li>
+                  <li>Deploy proven Sammy Rabbit content and brand assets</li>
+                  <li>Develop Year 2 launch strategy for book giveaway and youth network</li>
+                  <li>Begin funder outreach and founding partner cultivation</li>
+                  <li>Launch initial awareness and social presence</li>
+                </ul>
+                <div className="fiveyr__budget">
+                  <span className="fiveyr__budget-label">Annual budget</span>
+                  <span className="fiveyr__budget-amount">$250,000</span>
+                </div>
+              </div>
+
+              {/* Year 2 */}
+              <div className="fiveyr__card fiveyr__card--y2">
+                <div className="fiveyr__card-top">
+                  <span className="fiveyr__year">Year 2</span>
+                  <span className="fiveyr__theme-badge fiveyr__theme-badge--launch">Launch</span>
+                </div>
+                <h3 className="fiveyr__subtitle">National book giveaway &amp; youth workforce launch</h3>
+                <ul className="fiveyr__list">
+                  <li>Launch 100,000-book and curriculum giveaway to low-to-moderate-income families</li>
+                  <li>Activate youth workforce pipeline: paid internships, part-time roles, ambassador program</li>
+                  <li>Onboard first cohort of school and community partners</li>
+                  <li>Deploy digital learning tools and platforms</li>
+                  <li>Begin community pilot programs in target markets</li>
+                  <li>Measure and report early reach and engagement data</li>
+                </ul>
+                <div className="fiveyr__budget">
+                  <span className="fiveyr__budget-label">Annual budget</span>
+                  <span className="fiveyr__budget-amount">$750,000</span>
+                </div>
+              </div>
+
+              {/* Year 3 */}
+              <div className="fiveyr__card fiveyr__card--y3">
+                <div className="fiveyr__card-top">
+                  <span className="fiveyr__year">Year 3</span>
+                  <span className="fiveyr__theme-badge fiveyr__theme-badge--scale">Scale</span>
+                </div>
+                <h3 className="fiveyr__subtitle">Training, evaluation &amp; community expansion</h3>
+                <ul className="fiveyr__list">
+                  <li>Expand to 10,000+ classrooms, afterschool programs, and youth orgs</li>
+                  <li>Launch educator and adult facilitator training programs</li>
+                  <li>Introduce formal program evaluation and impact reporting</li>
+                  <li>Deepen youth network with structured roles and mentorship tracks</li>
+                  <li>Broaden awareness campaigns reaching millions through media and partnerships</li>
+                  <li>Begin building toward revenue-generating strategies</li>
+                </ul>
+                <div className="fiveyr__budget">
+                  <span className="fiveyr__budget-label">Annual budget</span>
+                  <span className="fiveyr__budget-amount">$1,000,000</span>
+                </div>
+              </div>
+
+              {/* Year 4 */}
+              <div className="fiveyr__card fiveyr__card--y4">
+                <div className="fiveyr__card-top">
+                  <span className="fiveyr__year">Year 4</span>
+                  <span className="fiveyr__theme-badge fiveyr__theme-badge--deepen">Deepen</span>
+                </div>
+                <h3 className="fiveyr__subtitle">Technology, equity reach &amp; sustainability</h3>
+                <ul className="fiveyr__list">
+                  <li>Scale digital platform to reach hundreds of thousands online</li>
+                  <li>Expand into underserved communities with targeted equity focus</li>
+                  <li>Strengthen mission-aligned revenue streams to reduce philanthropy dependence</li>
+                  <li>Grow paid youth internship and job pathways — target 100+ students</li>
+                  <li>Deepen family engagement tools and parent confidence resources</li>
+                  <li>Publish multi-year impact report and third-party evaluation findings</li>
+                </ul>
+                <div className="fiveyr__budget">
+                  <span className="fiveyr__budget-label">Annual budget</span>
+                  <span className="fiveyr__budget-amount">$1,250,000</span>
+                </div>
+              </div>
+
+              {/* Year 5 */}
+              <div className="fiveyr__card fiveyr__card--y5">
+                <div className="fiveyr__card-top">
+                  <span className="fiveyr__year">Year 5</span>
+                  <span className="fiveyr__theme-badge fiveyr__theme-badge--movement">Movement</span>
+                </div>
+                <h3 className="fiveyr__subtitle">National movement &amp; long-term self-sufficiency</h3>
+                <ul className="fiveyr__list">
+                  <li>Achieve millions reached directly and indirectly with early financial literacy messaging</li>
+                  <li>Operate a self-sustaining national youth network and ambassador program</li>
+                  <li>Secure long-term institutional partnerships with school districts and nonprofits</li>
+                  <li>Normalize early money conversations as a mainstream cultural expectation</li>
+                  <li>Transition toward majority earned revenue and reduced grant dependence</li>
+                  <li>Establish Grow Good Daily as the leading national early financial education movement</li>
+                </ul>
+                <div className="fiveyr__budget">
+                  <span className="fiveyr__budget-label">Annual budget</span>
+                  <span className="fiveyr__budget-amount">$1,750,000</span>
+                </div>
+              </div>
+
+              {/* Total Card */}
+              <div className="fiveyr__card fiveyr__card--total">
+                <div className="fiveyr__total-inner">
+                  <span className="fiveyr__total-label">5-year total investment goal</span>
+                  <span className="fiveyr__total-amount">$5,000,000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="fiveyr__scroll-hint container text-center">
+            <span>← Scroll to explore the full roadmap →</span>
+          </div>
+        </AnimatedSection>
       </section>
 
       {/* Promise */}

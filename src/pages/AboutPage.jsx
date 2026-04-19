@@ -125,7 +125,7 @@ export default function AboutPage() {
                 Get In Touch
               </Link>
               <Link to="/founding-partners" className="btn btn--white btn--lg" id="about-cta-partners">
-                Founding Partners →
+                Ways to Support →
               </Link>
             </div>
           </AnimatedSection>

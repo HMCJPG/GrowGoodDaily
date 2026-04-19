@@ -497,6 +497,224 @@
   line-height: 1.8;
 }
 
+/* --- 5-Year Plan Horizontal Scroller --- */
+.fiveyr {
+  overflow: hidden;
+}
+
+.fiveyr__tagline {
+  font-size: 1.15rem !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  margin-bottom: var(--space-3xl);
+}
+
+.fiveyr__tagline strong {
+  color: var(--color-secondary-light);
+  font-weight: 800;
+}
+
+.fiveyr__track-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.25) transparent;
+  padding: var(--space-xl) 0 var(--space-2xl);
+  margin: 0 -1rem;
+}
+
+.fiveyr__track-wrapper::-webkit-scrollbar {
+  height: 6px;
+}
+
+.fiveyr__track-wrapper::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.05);
+  border-radius: 3px;
+}
+
+.fiveyr__track-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+  border-radius: 3px;
+}
+
+.fiveyr__track-wrapper::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.35);
+}
+
+.fiveyr__track {
+  display: flex;
+  gap: var(--space-xl);
+  padding: 0 max(var(--space-xl), calc((100vw - var(--container-max)) / 2 + var(--space-xl)));
+  width: max-content;
+}
+
+.fiveyr__card {
+  flex: 0 0 380px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  scroll-snap-align: start;
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+}
+
+.fiveyr__card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-4px);
+}
+
+.fiveyr__card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+}
+
+.fiveyr__year {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--color-white);
+}
+
+.fiveyr__theme-badge {
+  display: inline-block;
+  padding: 0.3rem 0.9rem;
+  border-radius: var(--radius-xl);
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.fiveyr__theme-badge--launch {
+  background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-dark));
+}
+
+.fiveyr__theme-badge--scale {
+  background: linear-gradient(135deg, var(--color-accent), #E64A19);
+}
+
+.fiveyr__theme-badge--deepen {
+  background: linear-gradient(135deg, #5C6BC0, #3949AB);
+}
+
+.fiveyr__theme-badge--movement {
+  background: linear-gradient(135deg, #AB47BC, #7B1FA2);
+}
+
+.fiveyr__subtitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.4;
+  margin-bottom: var(--space-xl);
+}
+
+.fiveyr__list {
+  padding-left: 0;
+  margin-bottom: var(--space-xl);
+  flex-grow: 1;
+}
+
+.fiveyr__list li {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.55;
+  padding: 0.35rem 0;
+  padding-left: 1.3rem;
+  position: relative;
+}
+
+.fiveyr__list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--color-secondary-light);
+  font-size: 0.8rem;
+}
+
+.fiveyr__budget {
+  padding-top: var(--space-lg);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.fiveyr__budget-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 600;
+}
+
+.fiveyr__budget-amount {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--color-secondary-light) 0%, var(--color-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Total Card */
+.fiveyr__card--total {
+  flex: 0 0 280px;
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-accent) 100%);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fiveyr__card--total:hover {
+  background: linear-gradient(135deg, var(--color-secondary-dark) 0%, var(--color-accent) 100%);
+}
+
+.fiveyr__total-inner {
+  text-align: center;
+}
+
+.fiveyr__total-label {
+  display: block;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 600;
+  margin-bottom: var(--space-lg);
+}
+
+.fiveyr__total-amount {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: var(--color-white);
+  line-height: 1;
+}
+
+.fiveyr__scroll-hint {
+  margin-top: var(--space-xl);
+}
+
+.fiveyr__scroll-hint span {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.35);
+  font-style: italic;
+  letter-spacing: 0.5px;
+}
+
 /* --- Responsive --- */
 @media (max-width: 1024px) {
   .model__steps {
@@ -552,5 +770,13 @@
   .model__steps {
     grid-template-columns: 1fr;
     gap: var(--space-2xl);
+  }
+
+  .fiveyr__card {
+    flex: 0 0 300px;
+  }
+
+  .fiveyr__card--total {
+    flex: 0 0 240px;
   }
 }
