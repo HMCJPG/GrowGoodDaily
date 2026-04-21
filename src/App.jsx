@@ -8,6 +8,7 @@ import HowItWorksPage from './pages/HowItWorksPage';
 import FoundingPartnersPage from './pages/FoundingPartnersPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
+import FiveYearPlanPage from './pages/FiveYearPlanPage';
 import './App.css';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/founding-partners" element={<FoundingPartnersPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/5-year-plan" element={<FiveYearPlanPage />} />
         </Routes>
         <Footer />
       </div>

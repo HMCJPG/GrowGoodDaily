@@ -180,6 +180,47 @@
   background: linear-gradient(135deg, var(--color-primary-lighter) 0%, var(--color-warm) 100%);
 }
 
+.differentiators__card--expanded {
+  grid-column: span 2;
+  text-align: left;
+  padding: var(--space-2xl) var(--space-3xl);
+}
+
+.differentiators__card--expanded .card__icon {
+  margin: 0 0 var(--space-lg) 0;
+}
+
+.card__details {
+  list-style: none;
+  padding: 0;
+  margin-top: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.card__details li {
+  padding-left: 1.4rem;
+  position: relative;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--color-text-light);
+}
+
+.card__details li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .differentiators__card--expanded {
+    grid-column: span 1;
+  }
+}
+
 /* --- Model Steps --- */
 .model__steps {
   display: grid;
@@ -361,6 +402,55 @@
   line-height: 1.6;
 }
 
+/* --- Credibility Logos --- */
+.credibility__logos-section {
+  margin-top: var(--space-4xl);
+  padding-top: var(--space-2xl);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.credibility__logos-title {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: var(--space-2xl);
+  font-weight: 500;
+}
+
+.credibility__logo-track {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-3xl);
+}
+
+.credibility__logo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  filter: grayscale(100%) brightness(200%);
+  opacity: 0.7;
+  transition: all var(--transition-base);
+}
+
+.credibility__logo-item:hover {
+  filter: grayscale(0%) brightness(100%);
+  opacity: 1;
+}
+
+.credibility__logo-item img {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+}
+
+.credibility__logo-item span {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
 /* --- Impact Numbers --- */
 .impact__grid {
   display: grid;
@@ -469,8 +559,9 @@
 
 /* --- CTA Section --- */
 .cta-section__options {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: var(--space-lg);
   margin-top: var(--space-3xl);
 }
@@ -481,6 +572,7 @@
   align-items: center;
   gap: var(--space-md);
   padding: var(--space-2xl) var(--space-lg);
+  min-width: 180px;
   background: rgba(255, 255, 255, 0.06);
   border: 2px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-lg);

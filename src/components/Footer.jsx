@@ -33,6 +33,7 @@ export default function Footer() {
               <li><Link to="/vision" id="footer-link-vision">Our Vision</Link></li>
               <li><Link to="/why-it-matters" id="footer-link-why">Why It Matters</Link></li>
               <li><Link to="/how-it-works" id="footer-link-how">How It Works</Link></li>
+              <li><Link to="/5-year-plan" id="footer-link-plan">5-Year Plan</Link></li>
             </ul>
           </div>
           <div className="footer__col">
