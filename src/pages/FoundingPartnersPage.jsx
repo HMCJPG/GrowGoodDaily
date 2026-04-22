@@ -82,7 +82,7 @@ export default function FoundingPartnersPage() {
                 Grow Good Daily is in its formative stage. This is a rare opportunity to be part of something from the very beginning. To help shape a vision, influence its direction, and be recognized for the role you play in launching it.
               </p>
               <p>
-                Founding partners will help launch a new model for earlier financial education, stronger families, youth leadership, and broader economic opportunity. Your early support will fuel a $250,000 year-one effort that lays the foundation for a $5 million five-year vision.
+                Whether you donate, sponsor, or volunteer, as a founding supporter you will help launch a new model for earlier financial education, stronger families, youth leadership, and broader economic opportunity. Your early support will fuel a $250,000 year-one effort that lays the foundation for a $5 million five-year vision.
               </p>
             </div>
           </AnimatedSection>
