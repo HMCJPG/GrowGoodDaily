@@ -66,7 +66,7 @@ export default function FoundingPartnersPage() {
             Support the Mission. Grow the Impact.
           </h1>
           <p className="page-hero__subtitle animate-fade-up delay-2">
-            Whether you give, sponsor, partner, volunteer, or simply spread the word, every act of support helps children build healthier financial futures.
+            Whether you donate, sponsor or volunteer, every act of support helps children build healthier financial futures.
           </p>
         </div>
       </section>
