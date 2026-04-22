@@ -228,7 +228,6 @@ export default function HomePage() {
               <p>Ability to quickly deploy proven resources and programming from day one of operations</p>
             </AnimatedSection>
           </div>
-          </div>
           <AnimatedSection className="credibility__logos-section text-center" delay={0.5}>
             <h3 className="credibility__logos-title">Leading organizations that have trusted Sam X Renick’s financial education strategies.</h3>
             <div className="credibility__logo-track">
