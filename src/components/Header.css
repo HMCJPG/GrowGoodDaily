@@ -79,6 +79,52 @@
   gap: var(--space-xs);
 }
 
+.header__nav-item {
+  position: relative;
+}
+
+.dropdown-caret {
+  font-size: 0.6em;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+.header__dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 200px;
+  background: white;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all var(--transition-base);
+  padding: 0.5rem 0;
+  z-index: 1000;
+}
+
+.header__nav-item--dropdown:hover .header__dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.header__dropdown-link {
+  display: block;
+  padding: 0.7rem 1.2rem;
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.header__dropdown-link:hover {
+  background: var(--color-bg-light);
+  color: var(--color-primary);
+}
+
 .header__nav-link {
   font-family: var(--font-body);
   font-size: 0.9rem;

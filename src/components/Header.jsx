@@ -22,11 +22,17 @@ export default function Header() {
 
   const navLinks = [
     { path: '/', label: 'Home' },
-    { path: '/vision', label: 'Vision' },
     { path: '/why-it-matters', label: 'Why It Matters' },
     { path: '/how-it-works', label: 'How It Works' },
     { path: '/founding-partners', label: 'Ways to Support' },
-    { path: '/about', label: 'About' },
+    { 
+      path: '/about', 
+      label: 'About',
+      dropdown: [
+        { path: '/about', label: 'About the Founder' },
+        { path: '/vision', label: 'Our Vision' },
+      ]
+    },
     { path: '/contact', label: 'Contact' },
   ];
 
@@ -58,14 +64,28 @@ export default function Header() {
         <nav className={`header__nav ${isMobileMenuOpen ? 'header__nav--open' : ''}`} id="main-navigation" aria-label="Main navigation">
           <ul className="header__nav-list">
             {navLinks.map((link) => (
-              <li key={link.path} className="header__nav-item">
+              <li key={link.path} className={`header__nav-item ${link.dropdown ? 'header__nav-item--dropdown' : ''}`}>
                 <Link
                   to={link.path}
                   className={`header__nav-link ${location.pathname === link.path ? 'header__nav-link--active' : ''}`}
                   id={`nav-link-${link.path.replace('/', '') || 'home'}`}
                 >
                   {link.label}
+                  {link.dropdown && <span className="dropdown-caret">▼</span>}
                 </Link>
+                {link.dropdown && (
+                  <div className="header__dropdown-menu">
+                    {link.dropdown.map((dropLink) => (
+                      <Link 
+                        key={dropLink.path} 
+                        to={dropLink.path} 
+                        className="header__dropdown-link"
+                      >
+                        {dropLink.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </li>
             ))}
           </ul>

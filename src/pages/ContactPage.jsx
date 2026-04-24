@@ -111,9 +111,9 @@ export default function ContactPage() {
                         onChange={handleChange}
                         required
                       >
-                        <option value="funding">Funding / Financial Support</option>
-                        <option value="partnership">Partnership / Collaboration</option>
-                        <option value="advisory">Advisory / Expertise</option>
+                        <option value="donate">Donate / Financial Support</option>
+                        <option value="sponsor">Sponsor</option>
+                        <option value="volunteer">Volunteer / Advisory</option>
                         <option value="updates">Receiving Updates</option>
                         <option value="other">Other</option>
                       </select>
@@ -153,22 +153,22 @@ export default function ContactPage() {
                   <div className="contact-sidebar__option">
                     <span className="contact-sidebar__option-icon">💰</span>
                     <div>
-                      <strong>I want to fund</strong>
+                      <strong>I want to donate</strong>
                       <p>Help launch and sustain early programming</p>
                     </div>
                   </div>
                   <div className="contact-sidebar__option">
                     <span className="contact-sidebar__option-icon">🤝</span>
                     <div>
-                      <strong>I want to partner</strong>
+                      <strong>I want to sponsor</strong>
                       <p>Bring programming to your community</p>
                     </div>
                   </div>
                   <div className="contact-sidebar__option">
-                    <span className="contact-sidebar__option-icon">💡</span>
+                    <span className="contact-sidebar__option-icon">🙌</span>
                     <div>
-                      <strong>I want to advise</strong>
-                      <p>Share your expertise and insights</p>
+                      <strong>I want to volunteer</strong>
+                      <p>Share your time, expertise, and insights</p>
                     </div>
                   </div>
                   <div className="contact-sidebar__option">

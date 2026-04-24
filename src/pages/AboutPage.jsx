@@ -38,7 +38,7 @@ export default function AboutPage() {
           <AnimatedSection>
             <div className="about-statement">
               <span className="section__label">Vision Statement</span>
-              <h2 className="section__title">Our Vision</h2>
+              <h2 className="section__title"><Link to="/vision" style={{color: 'inherit'}}>Our Vision</Link></h2>
               <p className="about-statement__text">
                 A world where every child, regardless of zip code, grows up with early access to the knowledge, habits, and opportunities to build financial confidence, pursue their dreams, and create a secure and independent future.
               </p>
@@ -122,6 +122,7 @@ export default function AboutPage() {
           <AnimatedSection>
             <div className="about-profile">
               <div className="about-profile__image">
+                <img src="/images/founder-portrait.png" alt="Sam X Renick, Founder of Grow Good Daily" />
                 <div className="about-profile__badges">
                   <span className="about-badge">25+ Years in Financial Education</span>
                   <span className="about-badge">Creator of Sammy Rabbit</span>
