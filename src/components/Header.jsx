@@ -22,17 +22,17 @@ export default function Header() {
 
   const navLinks = [
     { path: '/', label: 'Home' },
+    {
+      path: '/about',
+      label: 'About',
+      dropdown: [
+        { path: '/vision', label: 'Our Vision' },
+        { path: '/about', label: 'About the Founder' },
+      ]
+    },
     { path: '/why-it-matters', label: 'Why It Matters' },
     { path: '/how-it-works', label: 'How It Works' },
     { path: '/founding-partners', label: 'Ways to Support' },
-    { 
-      path: '/about', 
-      label: 'About',
-      dropdown: [
-        { path: '/about', label: 'About the Founder' },
-        { path: '/vision', label: 'Our Vision' },
-      ]
-    },
     { path: '/contact', label: 'Contact' },
   ];
 
@@ -76,9 +76,9 @@ export default function Header() {
                 {link.dropdown && (
                   <div className="header__dropdown-menu">
                     {link.dropdown.map((dropLink) => (
-                      <Link 
-                        key={dropLink.path} 
-                        to={dropLink.path} 
+                      <Link
+                        key={dropLink.path}
+                        to={dropLink.path}
                         className="header__dropdown-link"
                       >
                         {dropLink.label}

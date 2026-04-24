@@ -119,9 +119,7 @@ export default function VisionPage() {
               <Link to="/contact" className="btn btn--accent btn--lg" id="vision-cta-button">
                 Become a Founding Supporter
               </Link>
-              <Link to="/how-it-works" className="btn btn--white btn--lg" id="vision-how-button">
-                See How It Works →
-              </Link>
+
             </div>
           </AnimatedSection>
         </div>

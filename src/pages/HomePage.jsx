@@ -51,7 +51,7 @@ export default function HomePage() {
             </p>
             <div className="btn-group animate-fade-up delay-3">
               <Link to="/contact" className="btn btn--accent btn--lg" id="hero-cta-primary">
-                Join as an Early Supporter
+                Be an Early Supporter
               </Link>
               <Link to="/vision" className="btn btn--white btn--lg" id="hero-cta-secondary">
                 Read the Vision →
@@ -79,10 +79,10 @@ export default function HomePage() {
                   The system is backwards, and it's failing our children.
                 </p>
                 <p>
-                  For thirty years, financial literacy has been centered on high school students, producing negligible impact. Research shows money habits take root by age seven. By the time a student sits down in a high school finance class, their relationship with money is already formed.
+                  For thirty years, financial literacy has been centered on high school students, producing negligible impact. Research shows money habits take root by age seven. By the time a student sits down in a high school personal finance class, their relationship with money is already formed.
                 </p>
                 <p>
-                  Grow Good Daily closes that gap. We bring financial education upstream, to the years when it matters most, so a child's first experience with money is rooted in intention and confidence, not fear or scarcity.
+                  Grow Good Daily closes that gap. We bring financial education upstream, to the years when it makes the biggest difference, so a child's first experience with money is rooted in intention and confidence, not myth or misinformation.
                 </p>
                 <p className="big-idea__lead" style={{ marginTop: 'var(--space-lg)' }}>
                   We aren't just teaching financial literacy. We're redesigning the starting line.
