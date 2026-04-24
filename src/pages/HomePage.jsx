@@ -4,14 +4,13 @@ import './HomePage.css';
 
 export default function HomePage() {
   const differentiators = [
-    { icon: '🌱', title: 'Start Earlier', text: 'Help children build healthy habits, attitudes, and feelings towards money during their most impressionable years, when influence is strongest.' },
-    { icon: '📖', title: 'Unique Curriculum', text: 'Our curriculum goes beyond traditional financial literacy. We emphasize the bigger purpose of money: using it wisely to build self-sufficiency, create opportunity, strengthen freedom and confidence, and secure a better future.', details: ['It\'s Habit-Driven: Because financial success is the result of what you do daily, not just what you know.', 'It\'s Built for Independence: It stresses timeless wealth building principles.', 'It\'s Actually Fun: We trade boring lectures for songs, games, and reading, making complex ideas "stick" through play.'] },
+    { icon: '🌱', title: 'Start Earlier', text: 'Reach and teach children during their most impressionable years, when influence is strongest and the foundation for lifelong money habits, attitudes, and feelings are being formed.' },
+    { icon: '📖', title: 'Unique Curriculum', text: 'Our curriculum goes beyond traditional financial literacy. We emphasize the bigger purpose of money: using it wisely to build self-sufficiency, create opportunity, strengthen freedom and confidence, and secure a better future.', details: ['It\'s Habit-Driven: Because financial well-being is the result of what you do daily, not just what you know.', 'It\'s Built for Independence: It stresses timeless wealth building principles.', 'It\'s Actually Fun: We trade boring lectures for songs, stories, and activities to get lessons to stick.'] },
     { icon: '🤝', title: 'Mobilize Older Youth', text: 'Engage teens as mentors and ambassadors, creating a powerful intergenerational learning loop.' },
-    { icon: '💡', title: 'Equip Everyday Influencers', text: 'Give parents, caregivers, teachers, and community leaders practical tools and resources.' },
-    { icon: '📣', title: 'Raise Awareness', text: 'Bring urgent attention to why earlier financial education matters for families and communities.' },
-    { icon: '💬', title: 'Make Money Talks Easier', text: 'Normalize and simplify conversations about money between adults and children.' },
-    { icon: '⭐', title: 'Reinforce Participation', text: 'Celebrate effort and engagement to keep families and communities coming back.' },
-    { icon: '🚀', title: 'Inspire Dreams', text: 'Connect financial habits to bigger life goals so children see saving as a path to their future.' },
+    { icon: '💡', title: 'Equip Everyday Influencers', text: 'Give parents, teachers, and community leaders practical tools and resources that make teaching young children about money easy.' },
+    { icon: '📣', title: 'Raise Awareness', text: 'Bring greater attention and urgency to early-age financial education, helping more families, schools, and communities access the resources they need.' },
+    { icon: '⭐', title: 'Reward, Reinforce and Incentivize Participation', text: 'Celebrate effort and engagement with encouragement, rewards, and incentives to keep families and communities building good money habits.' },
+    { icon: '🚀', title: 'Inspire Dreams', text: 'Curriculum designed around what kids personally take interest and invest in - their dreams!' },
     { icon: '🏛️', title: 'Wealth of Experience', text: 'Built on over 25 years of trusted, hands-on work in children\'s financial education, bringing proven strategies, deep expertise, and real-world credibility to every initiative.' },
   ];
 
@@ -106,7 +105,7 @@ export default function HomePage() {
             <span className="section__label">What Sets Us Apart</span>
             <h2 className="section__title">Our Unique Approach</h2>
             <p className="section__subtitle">
-              Nine core principles guide our approach to creating lasting change in financial education.
+              Eight core principles guide our approach to creating lasting change in financial education.
             </p>
           </AnimatedSection>
           <div className="differentiators__grid">
@@ -135,7 +134,7 @@ export default function HomePage() {
             <span className="section__label">The Model</span>
             <h2 className="section__title">How It Works</h2>
             <p className="section__subtitle">
-              Grow Good Daily uses a whole-community intergenerational model, engaging youth, parents, schools, and local enterprises together, so that financial education is reinforced everywhere a young person learns and grows, creating the consistent, long-term conditions real change requires.
+              Grow Good Daily uses a whole-community intergenerational model, engaging youth, parents, schools, and local enterprises together, so that financial education is offered and reinforced everywhere a young person learns and grows, creating the consistent, long-term conditions real change requires.
             </p>
           </AnimatedSection>
           <div className="model__steps">
@@ -150,7 +149,7 @@ export default function HomePage() {
           </div>
           <AnimatedSection className="model__quote text-center" delay={0.45}>
             <blockquote className="model__blockquote">
-              <p>"In 26 years of this work, we've learned that when you involve everyone who impacts young children, you impact and change everyone: families, communities, the entire system."</p>
+              <p>"In 26 years of doing this work, we’ve learned something powerful: when you involve everyone who influences young children, you do more than impact children. You help transform families, strengthen communities, and begin to change the entire system."</p>
               <cite>- Sam X Renick, Founder: Grow Good Daily, SammyRabbit.com, BedtimeMoneyHabits.com</cite>
             </blockquote>
           </AnimatedSection>
