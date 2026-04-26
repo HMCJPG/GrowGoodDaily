@@ -15,10 +15,10 @@ export default function HomePage() {
   ];
 
   const steps = [
-    { num: '01', title: 'Children Build Habits Early', text: 'Age-appropriate tools help young children practice saving, sharing, and smart choices.', icon: '👶' },
-    { num: '02', title: 'Older Youth Teach, Mentor, and Lead', text: 'Teenagers gain workforce skills while mentoring younger children in financial basics.', icon: '🎓' },
-    { num: '03', title: 'Parents and Teachers Get Practical Tools', text: 'Parents and educators receive resources that make money conversations easier to start.', icon: '👨‍👩‍👧' },
-    { num: '04', title: 'Communities Grow Stronger', text: 'A connected pipeline of opportunity strengthens families and neighborhoods.', icon: '🏘️' },
+    { num: '01', title: 'Children Build Habits Early', text: 'Age-appropriate tools and rewards help young children learn and practice foundational money habits so they are able to make smart choices and build bright futures!', icon: '👶' },
+    { num: '02', title: 'Older Youth Teach, Mentor, and Lead', text: 'In teaching and advocating early age personal finance, teens and young adults gain workforce skills and deepen their own financial literacy', icon: '🎓' },
+    { num: '03', title: 'Parents and Teachers Get Practical Tools', text: 'Parents and educators receive resources that make money conversations easy to start and keep going.', icon: '👨‍👩‍👧' },
+    { num: '04', title: 'Communities Grow Stronger', text: 'We unite children, youth, and mentors in a shared mission to master money. This collaborative model transforms individual knowledge into collective strength, ensuring a brighter, more secure future for the whole community.', icon: '🏘️' },
   ];
 
   const impactNumbers = [
@@ -86,6 +86,17 @@ export default function HomePage() {
                 <p className="big-idea__lead" style={{ marginTop: 'var(--space-lg)' }}>
                   We aren't just teaching financial literacy. We're redesigning the starting line.
                 </p>
+                <div className="big-idea__buttons" style={{ display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap', marginTop: 'var(--space-xl)' }}>
+                  <Link to="/vision#vision-story" className="btn btn--primary" id="big-idea-why-exists">
+                    Why We Exist
+                  </Link>
+                  <Link to="/vision#vision-beliefs" className="btn btn--secondary" id="big-idea-core-beliefs">
+                    Core Beliefs
+                  </Link>
+                  <Link to="/vision#vision-five-year" className="btn btn--secondary" id="big-idea-5yr-vision">
+                    5-Year Vision
+                  </Link>
+                </div>
               </div>
               <div className="big-idea__image">
                 <img
@@ -154,8 +165,8 @@ export default function HomePage() {
             </blockquote>
           </AnimatedSection>
           <AnimatedSection className="text-center" delay={0.5}>
-            <Link to="/how-it-works" className="btn btn--primary" id="model-learn-more">
-              Learn More About Our Model →
+            <Link to="/founding-partners" className="btn btn--accent btn--lg" id="model-early-supporter">
+              Be an Early Supporter →
             </Link>
           </AnimatedSection>
         </div>
@@ -172,11 +183,11 @@ export default function HomePage() {
                 <div className="why-now__points">
                   <div className="why-now__point">
                     <div className="why-now__point-icon">🧑‍🧒</div>
-                    <p>Too many young people enter adulthood without strong money habits and skills</p>
+                    <p>Too many young people still enter adulthood without the tools to manage money well, avoid harmful debt, or build lasting assets. These challenges hit hardest in low-to-moderate-income communities, and they are largely preventable. </p>
                   </div>
                   <div className="why-now__point">
                     <div className="why-now__point-icon">💵</div>
-                    <p>The most impressionable years are often missed, and the youth enter adulthood with unhealthy attitudes and feelings towards money</p>
+                    <p>Most interventions miss the years when habits are most impressionable. Most overlook the power of older youth to help drive change now. And early financial education still does not receive the public attention, urgency, or normalized everyday conversation it deserves.</p>
                   </div>
                   <div className="why-now__point">
                     <div className="why-now__point-icon">🔥</div>
@@ -332,6 +343,10 @@ export default function HomePage() {
                 <span className="cta-section__option-icon">🙌</span>
                 <span className="cta-section__option-text">Volunteer</span>
               </Link>
+              <Link to="/founding-partners#partners-goals" className="cta-section__option" id="cta-support-possible">
+                <span className="cta-section__option-icon">✨</span>
+                <span className="cta-section__option-text">What Your Support Makes Possible</span>
+              </Link>
             </div>
           </AnimatedSection>
         </div>
@@ -345,6 +360,11 @@ export default function HomePage() {
               <p className="transparency__text">
                 Grow Good Daily is in its earliest stage. The vision is set. Now we're looking to get the right people and enterprises "on the bus" in the "right roles" to help us launch it.
               </p>
+              <div style={{ marginTop: 'var(--space-xl)', textAlign: 'center' }}>
+                <Link to="/founding-partners" className="btn btn--accent btn--lg" id="transparency-early-supporter">
+                  Become an Early Supporter →
+                </Link>
+              </div>
             </div>
           </AnimatedSection>
         </div>

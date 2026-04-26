@@ -40,7 +40,7 @@ export default function Footer() {
             <h4 className="footer__col-title">Get Involved</h4>
             <ul>
               <li><Link to="/founding-partners" id="footer-link-partners">Ways to Support</Link></li>
-              <li><Link to="/about" id="footer-link-about">About the Founder</Link></li>
+              <li><Link to="/youth-strategy" id="footer-link-youth">Youth Strategy</Link></li>
               <li><Link to="/contact" id="footer-link-contact">Contact Us</Link></li>
             </ul>
           </div>

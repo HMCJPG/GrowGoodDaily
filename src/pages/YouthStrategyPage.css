@@ -1,0 +1,355 @@
+/* ===========================
+   Youth Strategy Page
+   =========================== */
+
+/* Intro */
+.youth-intro__lead {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: var(--color-text-light);
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* Opportunity Menu */
+.youth-opps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  margin-top: var(--space-3xl);
+}
+
+.youth-opp {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl) var(--space-3xl);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(45, 138, 78, 0.06);
+  transition: all var(--transition-base);
+}
+
+.youth-opp:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.youth-opp__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.youth-opp__num {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.youth-opp__icon {
+  font-size: 1.8rem;
+}
+
+.youth-opp__title {
+  font-size: 1.25rem;
+  color: var(--color-dark);
+  margin-bottom: var(--space-sm);
+}
+
+.youth-opp__desc {
+  font-size: 1.05rem;
+  color: var(--color-text-light);
+  margin-bottom: var(--space-lg);
+}
+
+.youth-opp__label {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--color-primary);
+  margin-bottom: var(--space-md);
+}
+
+.youth-opp__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-sm) var(--space-xl);
+}
+
+.youth-opp__list li {
+  font-size: 0.95rem;
+  color: var(--color-text-light);
+  line-height: 1.6;
+  padding-left: 1.4rem;
+  position: relative;
+}
+
+.youth-opp__list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* Student Roles */
+.youth-roles__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-xl);
+  margin-top: var(--space-3xl);
+}
+
+.youth-role-cat {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(45, 138, 78, 0.06);
+  transition: all var(--transition-base);
+}
+
+.youth-role-cat:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.youth-role-cat__title {
+  font-size: 1.1rem;
+  padding-bottom: var(--space-md);
+  margin-bottom: var(--space-lg);
+  border-bottom: 3px solid;
+}
+
+.youth-role-cat__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.youth-role-cat__list li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.92rem;
+  color: var(--color-text-light);
+  line-height: 1.5;
+}
+
+.youth-role-cat__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+/* Projects */
+.youth-projects__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-xl);
+  margin-top: var(--space-3xl);
+}
+
+.youth-project-cat {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(45, 138, 78, 0.06);
+  transition: all var(--transition-base);
+}
+
+.youth-project-cat:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+
+.youth-project-cat__icon {
+  font-size: 2rem;
+  margin-bottom: var(--space-md);
+}
+
+.youth-project-cat h3 {
+  font-size: 1.15rem;
+  margin-bottom: var(--space-lg);
+}
+
+.youth-project-cat ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.youth-project-cat li {
+  font-size: 0.92rem;
+  color: var(--color-text-light);
+  line-height: 1.6;
+  padding-left: 1.3rem;
+  position: relative;
+}
+
+.youth-project-cat li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+/* Tiers */
+.youth-tiers__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-xl);
+  margin-top: var(--space-3xl);
+  position: relative;
+}
+
+.youth-tiers__grid::before {
+  content: '';
+  position: absolute;
+  top: 44px;
+  left: 10%;
+  right: 10%;
+  height: 3px;
+  background: linear-gradient(90deg, #4CAF50, #F9A825, #FF7043, #2D8A4E);
+  border-radius: 2px;
+  z-index: 0;
+}
+
+.youth-tier {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl) var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(45, 138, 78, 0.06);
+  transition: all var(--transition-base);
+}
+
+.youth-tier:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.youth-tier__badge {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin: 0 auto var(--space-md);
+  box-shadow: var(--shadow-md);
+}
+
+.youth-tier__num {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--color-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.youth-tier h3 {
+  font-size: 1.1rem;
+  margin-bottom: var(--space-sm);
+}
+
+.youth-tier p {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* Benefits */
+.youth-benefits__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-3xl);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.youth-benefit {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+}
+
+.youth-benefit:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(4px);
+}
+
+.youth-benefit__check {
+  color: var(--color-secondary-light);
+  font-weight: 700;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.youth-benefit span:last-child {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .youth-tiers__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .youth-tiers__grid::before {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .youth-opp {
+    padding: var(--space-xl);
+  }
+
+  .youth-opp__list {
+    grid-template-columns: 1fr;
+  }
+
+  .youth-roles__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .youth-projects__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .youth-tiers__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .youth-benefits__grid {
+    grid-template-columns: 1fr;
+  }
+}

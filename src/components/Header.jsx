@@ -17,7 +17,14 @@ export default function Header() {
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
-    window.scrollTo(0, 0);
+    if (location.hash) {
+      setTimeout(() => {
+        const el = document.getElementById(location.hash.slice(1));
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      window.scrollTo(0, 0);
+    }
   }, [location]);
 
   const navLinks = [
@@ -32,6 +39,7 @@ export default function Header() {
     },
     { path: '/why-it-matters', label: 'Why It Matters' },
     { path: '/how-it-works', label: 'How It Works' },
+    { path: '/youth-strategy', label: 'Youth Strategy' },
     { path: '/founding-partners', label: 'Ways to Support' },
     { path: '/contact', label: 'Contact' },
   ];

@@ -92,25 +92,25 @@ export default function HowItWorksPage() {
             <AnimatedSection className="how-flow__step" delay={0}>
               <div className="how-flow__step-circle" style={{ background: 'linear-gradient(135deg, #E8F5E9, #4CAF50)' }}>👶</div>
               <h3>Children Build Habits Early</h3>
-              <p>Age-appropriate tools help young children practice saving, sharing, and smart choices.</p>
+              <p>Age-appropriate tools and rewards help young children learn and practice foundational money habits so they are able to make smart choices and build bright futures!</p>
             </AnimatedSection>
             <div className="how-flow__arrow">→</div>
             <AnimatedSection className="how-flow__step" delay={0.15}>
               <div className="how-flow__step-circle" style={{ background: 'linear-gradient(135deg, #FFF8E1, #F9A825)' }}>🎓</div>
-              <h3>Older Youth Teach and Lead</h3>
-              <p>Teenagers gain workforce skills while mentoring younger children in financial basics.</p>
+              <h3>Older Youth Teach, Mentor, and Lead</h3>
+              <p>In teaching and advocating early age personal finance, teens and young adults gain workforce skills and deepen their own financial literacy.</p>
             </AnimatedSection>
             <div className="how-flow__arrow">→</div>
             <AnimatedSection className="how-flow__step" delay={0.3}>
               <div className="how-flow__step-circle" style={{ background: 'linear-gradient(135deg, #FFF3E0, #FF7043)' }}>👨‍👩‍👧</div>
-              <h3>Adults Get Practical Tools</h3>
-              <p>Parents and educators receive resources that make money conversations easier to start.</p>
+              <h3>Parents and Teachers Get Practical Tools</h3>
+              <p>Parents and educators receive resources that make money conversations easy to start and keep going.</p>
             </AnimatedSection>
             <div className="how-flow__arrow">→</div>
             <AnimatedSection className="how-flow__step" delay={0.45}>
               <div className="how-flow__step-circle" style={{ background: 'linear-gradient(135deg, #E8F5E9, #2D8A4E)' }}>🏘️</div>
               <h3>Communities Grow Stronger</h3>
-              <p>A connected pipeline of opportunity strengthens families and neighborhoods.</p>
+              <p>We unite children, youth, and mentors in a shared mission to master money. This collaborative model transforms individual knowledge into collective strength, ensuring a brighter, more secure future for the whole community.</p>
             </AnimatedSection>
           </div>
         </div>
@@ -158,9 +158,14 @@ export default function HowItWorksPage() {
                 <p>
                   By engaging older youth as mentors and ambassadors, we create a powerful intergenerational learning loop. Teens reinforce their own financial knowledge while gaining leadership experience, workforce skills, and a sense of purpose.
                 </p>
-                <Link to="/contact" className="btn btn--primary" id="how-youth-cta">
-                  Support Youth Leadership →
-                </Link>
+                <div className="btn-group">
+                  <Link to="/founding-partners" className="btn btn--primary" id="how-youth-cta">
+                    Support Youth Jobs →
+                  </Link>
+                  <Link to="/youth-strategy" className="btn btn--secondary" id="how-youth-strategy">
+                    Youth Strategy →
+                  </Link>
+                </div>
               </div>
             </div>
           </AnimatedSection>
@@ -177,10 +182,7 @@ export default function HowItWorksPage() {
             </p>
             <div className="btn-group" style={{ justifyContent: 'center' }}>
               <Link to="/founding-partners" className="btn btn--accent btn--lg" id="how-cta-partners">
-                Become a Founding Partner
-              </Link>
-              <Link to="/about" className="btn btn--white btn--lg" id="how-cta-about">
-                About the Founder →
+                Becoming a Founding Supporter
               </Link>
             </div>
           </AnimatedSection>
