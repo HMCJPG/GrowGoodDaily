@@ -22,10 +22,10 @@ export default function HomePage() {
   ];
 
   const impactNumbers = [
-    { number: '$5M', label: 'Five-Year Vision' },
-    { number: '100K', label: 'Books & Curricula Given Away' },
-    { number: '10K', label: 'Classrooms & Youth Organizations Reached' },
-    { number: '100', label: 'Student Workforce Opportunities' },
+    { number: '$250K', label: 'First Year Goal' },
+    { number: '25K', label: 'Books & Curricula Given Away' },
+    { number: '100', label: 'Classrooms & Youth Organizations Reached' },
+    { number: '25', label: 'Student Workforce Opportunities' },
   ];
 
   return (
@@ -285,7 +285,7 @@ export default function HomePage() {
             <span className="section__label">The Vision</span>
             <h2 className="section__title">Measurable Impact, Real Goals</h2>
             <p className="section__subtitle">
-              Our five-year vision is ambitious, measurable, and grounded in a proven foundation.
+              Our five-year vision is ambitious, measurable, and grounded in a proven foundation. It begins with clear first-year goals designed to build momentum, demonstrate impact, and establish a strong base for long-term growth.
             </p>
           </AnimatedSection>
           <div className="impact__grid">
@@ -307,14 +307,14 @@ export default function HomePage() {
           <AnimatedSection>
             <div className="promise__content">
               <h2 className="promise__title">
-                We want to help redesign the starting line so more children grow up with healthy money habits, stronger confidence, and bigger futures.
+                We want to change the starting line for financial education so more children -- especially those from underserved communities -- grow up with healthy money habits and greater confidence to create the futures they want, including making their dreams come true.
               </h2>
               <div className="promise__benefits">
-                <span>Less fear around money</span>
+                <span>Less misinformation around money</span>
                 <span>Better family conversations</span>
                 <span>More confidence</span>
                 <span>Healthier choices</span>
-                <span>Stronger futures</span>
+                <span>Brighter futures</span>
               </div>
             </div>
           </AnimatedSection>
@@ -358,7 +358,7 @@ export default function HomePage() {
           <AnimatedSection>
             <div className="transparency__content">
               <p className="transparency__text">
-                Grow Good Daily is in its earliest stage. The vision is set. Now we're looking to get the right people and enterprises "on the bus" in the "right roles" to help us launch it.
+                Grow Good Daily is in its earliest stage. The vision is set. Now we're looking to get the right people and enterprises "on the bus" in the "right roles" to execute the mission.
               </p>
               <div style={{ marginTop: 'var(--space-xl)', textAlign: 'center' }}>
                 <Link to="/founding-partners" className="btn btn--accent btn--lg" id="transparency-early-supporter">
