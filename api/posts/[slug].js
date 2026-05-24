@@ -1,69 +1,27 @@
 /**
  * @module api/posts/[slug]
- * @description Handles single-post operations: GET, PUT, DELETE by slug.
- *
- * Storage keys (Vercel KV):
- *   - `post:{slug}`   → full post JSON
- *   - `posts:slugs`   → ordered array of all slugs
+ * @description Single-post operations: GET, PUT, DELETE by slug.
+ * Persistence is backed by the GitHub Contents API — see api/_lib/github.js.
  */
 
-import fs from 'fs';
+import {
+  getPost,
+  savePost,
+  deletePost,
+  stripInternal,
+} from '../_lib/github.js';
 
-const DB_FILE = '/tmp/growgood_posts.json';
-
-// Basic KV mock using the filesystem
-const kv = {
-  async get(key) {
-    try {
-      if (!fs.existsSync(DB_FILE)) return null;
-      const data = JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
-      return data[key] || null;
-    } catch { return null; }
-  },
-  async set(key, value) {
-    try {
-      let data = {};
-      if (fs.existsSync(DB_FILE)) {
-        data = JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
-      }
-      data[key] = value;
-      fs.writeFileSync(DB_FILE, JSON.stringify(data));
-    } catch {}
-  },
-  async del(key) {
-    try {
-      if (!fs.existsSync(DB_FILE)) return;
-      const data = JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
-      delete data[key];
-      fs.writeFileSync(DB_FILE, JSON.stringify(data));
-    } catch {}
-  }
-};
-
-// ─── Helpers ────────────────────────────────────────────────────────────────
-
-/** Apply CORS headers to the response. */
 function setCors(res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 }
 
-/**
- * Verify the Bearer token matches the admin password.
- * @param {import('@vercel/node').VercelRequest} req
- * @returns {boolean}
- */
 function verifyAuth(req) {
   const token = req.headers.authorization?.replace('Bearer ', '');
   return token === 'growgood2026';
 }
 
-/**
- * Derive a URL-safe slug from a string.
- * @param {string} text
- * @returns {string}
- */
 function slugify(text) {
   return text
     .toLowerCase()
@@ -74,23 +32,14 @@ function slugify(text) {
     .replace(/^-|-$/g, '');
 }
 
-// ─── Handler ────────────────────────────────────────────────────────────────
-
-/**
- * Vercel serverless handler for /api/posts/:slug
- * @param {import('@vercel/node').VercelRequest} req
- * @param {import('@vercel/node').VercelResponse} res
- */
 export default async function handler(req, res) {
   setCors(res);
 
-  // CORS preflight
   if (req.method === 'OPTIONS') {
     return res.status(204).end();
   }
 
   const { slug } = req.query;
-
   if (!slug) {
     return res.status(400).json({ error: 'Slug parameter is required' });
   }
@@ -112,31 +61,32 @@ export default async function handler(req, res) {
   }
 }
 
-// ─── GET /api/posts/:slug ───────────────────────────────────────────────────
-
 async function handleGet(req, res, slug) {
-  const post = await kv.get(`post:${slug}`);
+  const post = await getPost(slug);
 
   if (!post) {
     return res.status(404).json({ error: 'Post not found' });
   }
 
-  // Hide unpublished posts from unauthenticated users
-  if (!post.published && !verifyAuth(req)) {
+  const isAuthed = verifyAuth(req);
+
+  if (!post.published && !isAuthed) {
     return res.status(404).json({ error: 'Post not found' });
   }
 
-  return res.status(200).json(post);
-}
+  if (!isAuthed) {
+    res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=300');
+  }
 
-// ─── PUT /api/posts/:slug ───────────────────────────────────────────────────
+  return res.status(200).json(stripInternal(post));
+}
 
 async function handlePut(req, res, slug) {
   if (!verifyAuth(req)) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
-  const existing = await kv.get(`post:${slug}`);
+  const existing = await getPost(slug);
   if (!existing) {
     return res.status(404).json({ error: 'Post not found' });
   }
@@ -144,15 +94,15 @@ async function handlePut(req, res, slug) {
   const updates = req.body ?? {};
   const now = new Date().toISOString();
 
-  // Determine the new slug (may differ from current)
+  // If slug is changing, we'll create-new + delete-old
   let newSlug = slug;
   if (updates.slug && updates.slug !== slug) {
     newSlug = slugify(updates.slug);
-
-    // Make sure the new slug isn't already taken by another post
-    const conflict = await kv.get(`post:${newSlug}`);
+    const conflict = await getPost(newSlug);
     if (conflict) {
-      return res.status(409).json({ error: `A post with slug "${newSlug}" already exists` });
+      return res
+        .status(409)
+        .json({ error: `A post with slug "${newSlug}" already exists` });
     }
   }
 
@@ -161,48 +111,35 @@ async function handlePut(req, res, slug) {
     ...updates,
     slug: newSlug,
     updatedDate: now,
-    // Preserve immutable fields
     id: existing.id,
     publishedDate: existing.publishedDate,
   };
 
-  // If slug changed, swap KV keys and update the slugs index
-  if (newSlug !== slug) {
-    await kv.del(`post:${slug}`);
-    await kv.set(`post:${newSlug}`, updatedPost);
+  // Don't leak _sha into the persisted JSON
+  delete updatedPost._sha;
 
-    const slugs = (await kv.get('posts:slugs')) || [];
-    const idx = slugs.indexOf(slug);
-    if (idx !== -1) {
-      slugs[idx] = newSlug;
-    }
-    await kv.set('posts:slugs', slugs);
-  } else {
-    await kv.set(`post:${slug}`, updatedPost);
+  if (newSlug !== slug) {
+    // Create the new file, then delete the old one
+    const saved = await savePost(newSlug, updatedPost);
+    await deletePost(slug, existing._sha);
+    return res.status(200).json(stripInternal(saved));
   }
 
-  return res.status(200).json(updatedPost);
+  const saved = await savePost(slug, updatedPost, existing._sha);
+  return res.status(200).json(stripInternal(saved));
 }
-
-// ─── DELETE /api/posts/:slug ────────────────────────────────────────────────
 
 async function handleDelete(req, res, slug) {
   if (!verifyAuth(req)) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
-  const existing = await kv.get(`post:${slug}`);
+  const existing = await getPost(slug);
   if (!existing) {
     return res.status(404).json({ error: 'Post not found' });
   }
 
-  // Remove post data
-  await kv.del(`post:${slug}`);
-
-  // Remove slug from ordered index
-  const slugs = (await kv.get('posts:slugs')) || [];
-  const filtered = slugs.filter((s) => s !== slug);
-  await kv.set('posts:slugs', filtered);
+  await deletePost(slug, existing._sha);
 
   return res.status(200).json({ success: true });
 }
