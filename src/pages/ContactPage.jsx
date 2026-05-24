@@ -3,9 +3,9 @@ import { AnimatedSection } from '../components/AnimatedSection';
 import SEOHead from '../components/SEOHead';
 import './ContactPage.css';
 
-// Formspree form ID — set in Vercel as VITE_FORMSPREE_ID.
-// Get one free at https://formspree.io (sign up → New Form → copy the ID after /f/).
-const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID;
+// Formsubmit.co AJAX endpoint. First submission to a new email triggers a
+// one-time activation link sent to the destination address.
+const CONTACT_ENDPOINT = 'https://formsubmit.co/ajax/sammywebtesting@gmail.com';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -35,27 +35,25 @@ export default function ContactPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-
-    if (!FORMSPREE_ID) {
-      setError('Form is not configured yet. Please email us directly while we get this fixed.');
-      return;
-    }
-
     setIsSubmitting(true);
+
     try {
-      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      const res = await fetch(CONTACT_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          _subject: `Grow Good Daily contact: ${formData.interest}`,
+          _template: 'table',
+        }),
       });
 
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        const msg = data?.errors?.[0]?.message || 'Submission failed. Please try again.';
-        throw new Error(msg);
+        throw new Error(data?.message || 'Submission failed. Please try again.');
       }
 
       setIsSubmitted(true);
