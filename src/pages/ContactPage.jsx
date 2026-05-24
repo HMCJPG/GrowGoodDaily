@@ -3,6 +3,10 @@ import { AnimatedSection } from '../components/AnimatedSection';
 import SEOHead from '../components/SEOHead';
 import './ContactPage.css';
 
+// Formspree form ID — set in Vercel as VITE_FORMSPREE_ID.
+// Get one free at https://formspree.io (sign up → New Form → copy the ID after /f/).
+const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID;
+
 export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
@@ -12,6 +16,8 @@ export default function ContactPage() {
     message: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
   // Check URL params for pre-selected interest
   useState(() => {
@@ -26,11 +32,38 @@ export default function ContactPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // In production, this would send to a backend/API
-    console.log('Form submitted:', formData);
-    setIsSubmitted(true);
+    setError('');
+
+    if (!FORMSPREE_ID) {
+      setError('Form is not configured yet. Please email us directly while we get this fixed.');
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        const msg = data?.errors?.[0]?.message || 'Submission failed. Please try again.';
+        throw new Error(msg);
+      }
+
+      setIsSubmitted(true);
+    } catch (err) {
+      setError(err.message || 'Connection error. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -145,8 +178,19 @@ export default function ContactPage() {
                       />
                     </div>
 
-                    <button type="submit" className="btn btn--primary btn--lg contact-form__submit" id="contact-submit-btn">
-                      Send Message →
+                    {error && (
+                      <p className="contact-form__error" id="contact-form-error" role="alert">
+                        {error}
+                      </p>
+                    )}
+
+                    <button
+                      type="submit"
+                      className="btn btn--primary btn--lg contact-form__submit"
+                      id="contact-submit-btn"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? 'Sending…' : 'Send Message →'}
                     </button>
                   </form>
                 </>
