@@ -7,8 +7,40 @@
  *   - `posts:slugs`   → JSON array of all slugs ordered by publishedDate desc
  */
 
-import { kv } from '@vercel/kv';
+import fs from 'fs';
+import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
+
+const DB_FILE = '/tmp/growgood_posts.json';
+
+// Basic KV mock using the filesystem
+const kv = {
+  async get(key) {
+    try {
+      if (!fs.existsSync(DB_FILE)) return null;
+      const data = JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
+      return data[key] || null;
+    } catch { return null; }
+  },
+  async set(key, value) {
+    try {
+      let data = {};
+      if (fs.existsSync(DB_FILE)) {
+        data = JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
+      }
+      data[key] = value;
+      fs.writeFileSync(DB_FILE, JSON.stringify(data));
+    } catch {}
+  },
+  async del(key) {
+    try {
+      if (!fs.existsSync(DB_FILE)) return;
+      const data = JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
+      delete data[key];
+      fs.writeFileSync(DB_FILE, JSON.stringify(data));
+    } catch {}
+  }
+};
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
