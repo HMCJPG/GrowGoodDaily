@@ -44,12 +44,12 @@ const kv = {
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
-/** CORS headers applied to every response */
-const CORS_HEADERS = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-};
+/** Apply CORS headers to the response. */
+function setCors(res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+}
 
 /**
  * Verify the Bearer token matches ADMIN_PASSWORD.
@@ -84,9 +84,11 @@ function slugify(title) {
  * @param {import('@vercel/node').VercelResponse} res
  */
 export default async function handler(req, res) {
+  setCors(res);
+
   // CORS preflight
   if (req.method === 'OPTIONS') {
-    return res.status(204).set(CORS_HEADERS).end();
+    return res.status(204).end();
   }
 
   try {
@@ -98,16 +100,10 @@ export default async function handler(req, res) {
       return await handlePost(req, res);
     }
 
-    return res
-      .status(405)
-      .set(CORS_HEADERS)
-      .json({ error: 'Method not allowed' });
+    return res.status(405).json({ error: 'Method not allowed' });
   } catch (err) {
     console.error('Posts handler error:', err);
-    return res
-      .status(500)
-      .set(CORS_HEADERS)
-      .json({ error: err.message, stack: err.stack, name: err.name });
+    return res.status(500).json({ error: err.message, stack: err.stack, name: err.name });
   }
 }
 
@@ -154,10 +150,7 @@ async function handleGet(req, res) {
   // Strip full content from list items
   const items = paged.map(({ content, ...rest }) => rest);
 
-  return res
-    .status(200)
-    .set(CORS_HEADERS)
-    .json({ posts: items, total, page, totalPages });
+  return res.status(200).json({ posts: items, total, page, totalPages });
 }
 
 // ─── POST /api/posts ────────────────────────────────────────────────────────
@@ -169,10 +162,7 @@ async function handleGet(req, res) {
  */
 async function handlePost(req, res) {
   if (!verifyAuth(req)) {
-    return res
-      .status(401)
-      .set(CORS_HEADERS)
-      .json({ error: 'Unauthorized' });
+    return res.status(401).json({ error: 'Unauthorized' });
   }
 
   const {
@@ -187,34 +177,22 @@ async function handlePost(req, res) {
 
   // Validate required fields
   if (!title) {
-    return res
-      .status(400)
-      .set(CORS_HEADERS)
-      .json({ error: 'Title is required' });
+    return res.status(400).json({ error: 'Title is required' });
   }
   if (!content) {
-    return res
-      .status(400)
-      .set(CORS_HEADERS)
-      .json({ error: 'Content is required' });
+    return res.status(400).json({ error: 'Content is required' });
   }
 
   const slug = rawSlug ? slugify(rawSlug) : slugify(title);
 
   if (!slug) {
-    return res
-      .status(400)
-      .set(CORS_HEADERS)
-      .json({ error: 'Unable to generate a valid slug from the title' });
+    return res.status(400).json({ error: 'Unable to generate a valid slug from the title' });
   }
 
   // Check for duplicate slug
   const existing = await kv.get(`post:${slug}`);
   if (existing) {
-    return res
-      .status(409)
-      .set(CORS_HEADERS)
-      .json({ error: `A post with slug "${slug}" already exists` });
+    return res.status(409).json({ error: `A post with slug "${slug}" already exists` });
   }
 
   const now = new Date().toISOString();
@@ -238,5 +216,5 @@ async function handlePost(req, res) {
   slugs.unshift(slug); // newest first
   await kv.set('posts:slugs', slugs);
 
-  return res.status(201).set(CORS_HEADERS).json(post);
+  return res.status(201).json(post);
 }
