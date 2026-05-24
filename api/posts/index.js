@@ -75,7 +75,7 @@ export default async function handler(req, res) {
     return res
       .status(500)
       .set(CORS_HEADERS)
-      .json({ error: 'Internal server error' });
+      .json({ error: err.message, stack: err.stack, name: err.name });
   }
 }
 
