@@ -221,7 +221,7 @@
 .admin__dashboard {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: var(--space-2xl) var(--space-xl);
+  padding: calc(var(--space-2xl) * 2) var(--space-xl) var(--space-2xl);
 }
 
 .admin__dashboard-header {
