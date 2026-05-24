@@ -1,0 +1,188 @@
+import { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { AnimatedSection } from '../components/AnimatedSection';
+import SEOHead from '../components/SEOHead';
+import MarkdownRenderer from '../components/blog/MarkdownRenderer';
+import './BlogPostPage.css';
+
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  const d = new Date(dateStr);
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+function calcReadingTime(content) {
+  if (!content) return 1;
+  const words = content.trim().split(/\s+/).length;
+  return Math.max(1, Math.ceil(words / 200));
+}
+
+export default function BlogPostPage() {
+  const { slug } = useParams();
+  const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
+
+  useEffect(() => {
+    async function fetchPost() {
+      setLoading(true);
+      setNotFound(false);
+      try {
+        const res = await fetch(`/api/posts/${slug}`);
+        if (res.status === 404) {
+          setNotFound(true);
+          setPost(null);
+        } else if (!res.ok) {
+          throw new Error('Failed to load post');
+        } else {
+          const data = await res.json();
+          setPost(data);
+        }
+      } catch {
+        setNotFound(true);
+        setPost(null);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchPost();
+  }, [slug]);
+
+  // Loading skeleton
+  if (loading) {
+    return (
+      <main className="blog-post-page" id="blog-post-page">
+        <SEOHead title="Loading..." description="" noIndex />
+        <div className="blog-post__skeleton-hero" />
+        <div className="blog-post__skeleton-meta">
+          <div className="blog-post__skeleton-meta-item" />
+          <div className="blog-post__skeleton-meta-item" />
+          <div className="blog-post__skeleton-meta-item" />
+        </div>
+        <div className="blog-post__skeleton-content">
+          <div className="blog-post__skeleton-line blog-post__skeleton-line--heading" />
+          <div className="blog-post__skeleton-line" />
+          <div className="blog-post__skeleton-line blog-post__skeleton-line--short" />
+          <div className="blog-post__skeleton-line" />
+          <div className="blog-post__skeleton-line blog-post__skeleton-line--shorter" />
+          <div className="blog-post__skeleton-line" />
+          <div className="blog-post__skeleton-line blog-post__skeleton-line--short" />
+        </div>
+      </main>
+    );
+  }
+
+  // 404 state
+  if (notFound || !post) {
+    return (
+      <main className="blog-post-page" id="blog-post-page">
+        <SEOHead title="Post Not Found" description="The blog post you're looking for doesn't exist." noIndex />
+        <div className="blog-post__not-found" id="blog-post-not-found">
+          <span className="blog-post__not-found-emoji" role="img" aria-label="Not found">
+            🔍
+          </span>
+          <h2>Post not found</h2>
+          <p>The blog post you&apos;re looking for doesn&apos;t seem to exist.</p>
+          <Link to="/blog" className="btn btn--primary">
+            ← Back to Blog
+          </Link>
+        </div>
+      </main>
+    );
+  }
+
+  const readingTime = calcReadingTime(post.content);
+  const hasCoverImage = !!post.coverImage;
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt || '',
+    image: post.coverImage || undefined,
+    datePublished: post.publishedDate,
+    dateModified: post.updatedDate || post.publishedDate,
+    author: {
+      '@type': 'Person',
+      name: 'Sam X Renick',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Grow Good Daily',
+      url: 'https://growgooddaily.com',
+    },
+  };
+
+  return (
+    <main className="blog-post-page" id="blog-post-page">
+      <SEOHead
+        title={post.title}
+        description={post.excerpt || ''}
+        canonical={`https://growgooddaily.com/blog/${post.slug}`}
+        ogType="article"
+        ogImage={post.coverImage || undefined}
+        jsonLd={jsonLd}
+      />
+
+      {/* Hero */}
+      <header
+        className={`blog-post__hero ${hasCoverImage ? '' : 'blog-post__hero--no-image'}`}
+        style={hasCoverImage ? { backgroundImage: `url(${post.coverImage})` } : undefined}
+        id="blog-post-hero"
+      >
+        {hasCoverImage && <div className="blog-post__hero-overlay" />}
+        <div className="blog-post__hero-content">
+          <AnimatedSection animation="fade-up">
+            <h1>{post.title}</h1>
+          </AnimatedSection>
+        </div>
+      </header>
+
+      {/* Metadata */}
+      <div className="blog-post__meta" id="blog-post-meta">
+        <span className="blog-post__meta-item">
+          <span className="blog-post__meta-icon" role="img" aria-hidden="true">📅</span>
+          <time dateTime={post.publishedDate}>
+            {formatDate(post.publishedDate)}
+          </time>
+        </span>
+        <span className="blog-post__meta-item">
+          <span className="blog-post__meta-icon" role="img" aria-hidden="true">⏱</span>
+          {readingTime} min read
+        </span>
+        {post.tags && post.tags.length > 0 && (
+          <div className="blog-post__tags">
+            {post.tags.map((tag) => (
+              <Link key={tag} to={`/blog?tag=${encodeURIComponent(tag)}`} className="blog-post__tag">
+                {tag}
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Content */}
+      <article className="blog-post__content" id="blog-post-content">
+        <Link to="/blog" className="blog-post__back">
+          ← Back to Blog
+        </Link>
+        <MarkdownRenderer content={post.content} />
+      </article>
+
+      {/* Author */}
+      <aside className="blog-post__author" id="blog-post-author">
+        <AnimatedSection animation="fade-up">
+          <div className="blog-post__author-card">
+            <div className="blog-post__author-avatar" role="img" aria-label="Author">
+              ✍️
+            </div>
+            <div className="blog-post__author-info">
+              <h4>Written by Sam X Renick</h4>
+              <p>Founder of Grow Good Daily and creator of Sammy Rabbit — helping children and families build stronger financial futures for over 25 years.</p>
+            </div>
+          </div>
+        </AnimatedSection>
+      </aside>
+    </main>
+  );
+}

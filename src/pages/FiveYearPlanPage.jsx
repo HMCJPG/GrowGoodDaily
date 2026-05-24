@@ -1,9 +1,23 @@
 import { AnimatedSection } from '../components/AnimatedSection';
+import SEOHead from '../components/SEOHead';
 import './HomePage.css';
 
 export default function FiveYearPlanPage() {
   return (
     <main className="fiveyr-page" id="fiveyr-page">
+      <SEOHead
+        title="5-Year Plan — $5 Million Roadmap for Early Financial Education"
+        description="Explore Grow Good Daily's $5 million five-year roadmap: from nonprofit formation and $250K year-one goal to a national movement reaching millions with early financial education."
+        canonical="https://growgooddaily.com/5-year-plan"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          name: 'Five-Year Plan',
+          description: 'Grow Good Daily\'s $5 million five-year roadmap for scaling early financial education nationally.',
+          url: 'https://growgooddaily.com/5-year-plan',
+          isPartOf: { '@type': 'WebSite', name: 'Grow Good Daily', url: 'https://growgooddaily.com' },
+        }}
+      />
       {/* Page Hero */}
       <section className="page-hero" id="fiveyr-hero">
         <div className="page-hero__bg">

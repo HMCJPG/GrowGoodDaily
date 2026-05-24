@@ -362,7 +362,68 @@
   box-shadow: var(--shadow-lg);
 }
 
-/* --- Credibility --- */
+/* --- Why Now 2 (Second section) --- */
+.why-now-2 {
+  background: var(--color-bg);
+}
+
+.why-now-2__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xl);
+  margin: var(--space-3xl) 0 var(--space-2xl);
+}
+
+.why-now-2__card {
+  padding: var(--space-2xl);
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(45, 138, 78, 0.1);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.why-now-2__card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.why-now-2__card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-primary);
+}
+
+.why-now-2__card:hover::before {
+  opacity: 1;
+}
+
+.why-now-2__icon {
+  font-size: 2.2rem;
+  margin-bottom: var(--space-lg);
+}
+
+.why-now-2__card h3 {
+  font-size: 1.15rem;
+  margin-bottom: var(--space-md);
+  color: var(--color-dark);
+}
+
+.why-now-2__card p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--color-text-light);
+}
+
 .credibility__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -879,7 +940,8 @@
 
   .credibility__grid,
   .impact__grid,
-  .cta-section__options {
+  .cta-section__options,
+  .why-now-2__grid {
     grid-template-columns: 1fr;
   }
 

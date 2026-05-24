@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { AnimatedSection } from '../components/AnimatedSection';
+import SEOHead from '../components/SEOHead';
 import './HomePage.css';
 
 export default function HomePage() {
@@ -30,6 +31,22 @@ export default function HomePage() {
 
   return (
     <main className="home" id="home-page">
+      <SEOHead
+        title="Grow Good Daily | Early Financial Education for Children, Families & Communities"
+        description="Grow Good Daily is building a whole-community model that brings financial education to children earlier — through parents, mentors, schools, and local enterprises. Start early. Dream big. Grow good."
+        canonical="https://growgooddaily.com/"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'Organization',
+          name: 'Grow Good Daily',
+          url: 'https://growgooddaily.com',
+          logo: 'https://growgooddaily.com/favicon.svg',
+          description: 'A nonprofit vision building early financial education for children, families, and communities.',
+          founder: { '@type': 'Person', name: 'Sam X Renick' },
+          sameAs: ['https://sammyrabbit.com', 'https://bedtimemoneyhabits.com'],
+        }}
+      />
+
       {/* Hero Section */}
       <section className="hero" id="hero-section">
         <div className="hero__bg">
@@ -160,7 +177,7 @@ export default function HomePage() {
           </div>
           <AnimatedSection className="model__quote text-center" delay={0.45}>
             <blockquote className="model__blockquote">
-              <p>"In 26 years of doing this work, we’ve learned something powerful: when you involve everyone who influences young children, you do more than impact children. You help transform families, strengthen communities, and begin to change the entire system."</p>
+              <p>"In 26 years of doing this work, we've learned something powerful: when you involve everyone who influences young children, you do more than impact children. You help transform families, strengthen communities, and begin to change the entire system."</p>
               <cite>- Sam X Renick, Founder: Grow Good Daily, SammyRabbit.com, BedtimeMoneyHabits.com</cite>
             </blockquote>
           </AnimatedSection>
@@ -172,7 +189,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Why Now */}
+      {/* Why Now - Section 1 */}
       <section className="section section--warm why-now" id="why-now-section">
         <div className="container">
           <AnimatedSection>
@@ -202,6 +219,46 @@ export default function HomePage() {
                 />
               </div>
             </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Why Now - Section 2: Deeper Case */}
+      <section className="section why-now-2" id="why-now-2-section">
+        <div className="container">
+          <AnimatedSection className="text-center">
+            <span className="section__label">The Deeper Case</span>
+            <h2 className="section__title">Why This Moment Matters</h2>
+            <p className="section__subtitle">
+              The case for starting now has never been stronger. Here's what's converging to make this the right time.
+            </p>
+          </AnimatedSection>
+          <div className="why-now-2__grid">
+            <AnimatedSection className="why-now-2__card" delay={0.1}>
+              <div className="why-now-2__icon">📊</div>
+              <h3>The Data Is Clear</h3>
+              <p>Research from Cambridge University shows money habits form by age 7. Yet 95% of financial literacy programs start in high school. The gap is enormous — and the cost of inaction is measured in generations of lost opportunity.</p>
+            </AnimatedSection>
+            <AnimatedSection className="why-now-2__card" delay={0.2}>
+              <div className="why-now-2__icon">⚖️</div>
+              <h3>The Equity Gap Is Widening</h3>
+              <p>Children from low-income families are 3x less likely to receive financial education at home. As costs rise and economic uncertainty grows, early intervention is the most effective tool we have to level the playing field.</p>
+            </AnimatedSection>
+            <AnimatedSection className="why-now-2__card" delay={0.3}>
+              <div className="why-now-2__icon">📱</div>
+              <h3>Digital Changes Everything</h3>
+              <p>Today's children encounter digital payments, in-app purchases, and online advertising before kindergarten. The financial landscape they'll navigate is more complex than ever — and the tools to prepare them must start earlier.</p>
+            </AnimatedSection>
+            <AnimatedSection className="why-now-2__card" delay={0.4}>
+              <div className="why-now-2__icon">🏛️</div>
+              <h3>A Proven Foundation Is Ready</h3>
+              <p>25+ years of tested content through SammyRabbit.com and BedtimeMoneyHabits.com means we aren't starting from scratch. The resources are built. The expertise is deep. What's needed now is the community to scale it.</p>
+            </AnimatedSection>
+          </div>
+          <AnimatedSection className="text-center" delay={0.5}>
+            <Link to="/why-it-matters" className="btn btn--primary btn--lg" id="why-now-2-learn-more">
+              Explore Why It Matters →
+            </Link>
           </AnimatedSection>
         </div>
       </section>
@@ -239,7 +296,7 @@ export default function HomePage() {
             </AnimatedSection>
           </div>
           <AnimatedSection className="credibility__logos-section text-center" delay={0.5}>
-            <h3 className="credibility__logos-title">Leading organizations that have trusted Sam X Renick’s financial education strategies.</h3>
+            <h3 className="credibility__logos-title">Leading organizations that have trusted Sam X Renick's financial education strategies.</h3>
             <div className="credibility__logo-track">
               <div className="credibility__logo-item">
                 <img src="https://logo.clearbit.com/defense.gov" alt="Department of Defense" loading="lazy" />

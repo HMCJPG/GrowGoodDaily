@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { AnimatedSection } from '../components/AnimatedSection';
+import SEOHead from '../components/SEOHead';
 import './HowItWorksPage.css';
 
 export default function HowItWorksPage() {
@@ -56,6 +57,19 @@ export default function HowItWorksPage() {
 
   return (
     <main className="how-page" id="how-it-works-page">
+      <SEOHead
+        title="How It Works — An Intergenerational Financial Education Model"
+        description="Learn how Grow Good Daily's four-phase model works: starting with early childhood habits, engaging youth mentors, empowering families and educators, and scaling community impact."
+        canonical="https://growgooddaily.com/how-it-works"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          name: 'How It Works',
+          description: 'A clear, connected approach that starts with young children and builds outward through youth, families, and communities.',
+          url: 'https://growgooddaily.com/how-it-works',
+          isPartOf: { '@type': 'WebSite', name: 'Grow Good Daily', url: 'https://growgooddaily.com' },
+        }}
+      />
       {/* Page Hero */}
       <section className="page-hero" id="how-hero">
         <div className="page-hero__bg">

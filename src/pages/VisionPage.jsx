@@ -1,10 +1,24 @@
 import { Link } from 'react-router-dom';
 import { AnimatedSection } from '../components/AnimatedSection';
+import SEOHead from '../components/SEOHead';
 import './VisionPage.css';
 
 export default function VisionPage() {
   return (
     <main className="vision-page" id="vision-page">
+      <SEOHead
+        title="Our Vision — Redesigning the Starting Line for Economic Opportunity"
+        description="Discover Grow Good Daily's vision: why we exist, what we believe about early financial education, and our five-year plan to invest $5 million in children, families, and communities."
+        canonical="https://growgooddaily.com/vision"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          name: 'Our Vision',
+          description: 'The full story behind Grow Good Daily: why we exist, what we believe, and where we\'re headed.',
+          url: 'https://growgooddaily.com/vision',
+          isPartOf: { '@type': 'WebSite', name: 'Grow Good Daily', url: 'https://growgooddaily.com' },
+        }}
+      />
       {/* Page Hero */}
       <section className="page-hero" id="vision-hero">
         <div className="page-hero__bg">

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { AnimatedSection } from '../components/AnimatedSection';
+import SEOHead from '../components/SEOHead';
 import './FoundingPartnersPage.css';
 
 export default function FoundingPartnersPage() {
@@ -7,6 +8,24 @@ export default function FoundingPartnersPage() {
 
   return (
     <main className="partners-page" id="founding-partners-page">
+      <SEOHead
+        title="Ways to Support — Donate, Sponsor & Volunteer for Early Financial Education"
+        description="Support Grow Good Daily: donate to fund books and curricula, sponsor schools and youth programs, or volunteer your time. Help children build healthy money habits from day one."
+        canonical="https://growgooddaily.com/founding-partners"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          name: 'Ways to Support Grow Good Daily',
+          description: 'Donate, sponsor, or volunteer to advance early financial education for children and families.',
+          url: 'https://growgooddaily.com/founding-partners',
+          isPartOf: { '@type': 'WebSite', name: 'Grow Good Daily', url: 'https://growgooddaily.com' },
+          potentialAction: {
+            '@type': 'DonateAction',
+            name: 'Donate to Grow Good Daily',
+            target: 'https://growgooddaily.com/contact?interest=donate',
+          },
+        }}
+      />
       {/* Page Hero */}
       <section className="page-hero" id="partners-hero">
         <div className="page-hero__bg">

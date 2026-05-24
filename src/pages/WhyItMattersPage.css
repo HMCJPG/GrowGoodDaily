@@ -2,6 +2,68 @@
    Why It Matters Page
    =========================== */
 
+/* --- Primary Why Now Detail --- */
+.why-now-detail__layout {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: var(--space-4xl);
+  align-items: start;
+}
+
+.why-now-detail__lead {
+  font-size: 1.35rem !important;
+  font-weight: 600;
+  color: var(--color-dark) !important;
+  line-height: 1.6;
+  margin-bottom: var(--space-lg);
+}
+
+.why-now-detail__text p {
+  margin-bottom: var(--space-lg);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.why-now-detail__text strong {
+  color: var(--color-primary-dark);
+}
+
+.why-now-detail__visual {
+  position: sticky;
+  top: 120px;
+}
+
+.why-now-detail__visual img {
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+}
+
+.why-now-detail__callout {
+  margin-top: var(--space-xl);
+  padding: var(--space-xl) var(--space-2xl);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  color: var(--color-white);
+}
+
+.why-now-detail__callout-number {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: var(--space-xs);
+}
+
+.why-now-detail__callout-text {
+  display: block;
+  font-size: 0.95rem;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+/* --- Problem Layout (kept for backwards compat) --- */
 .why-problem__layout {
   display: grid;
   grid-template-columns: 1.3fr 1fr;
@@ -109,7 +171,125 @@
   line-height: 1.7;
 }
 
-/* Impact */
+/* --- Accordion Section --- */
+.why-accordion-section {
+  background: var(--color-bg);
+}
+
+.why-accordion {
+  max-width: 860px;
+  margin: var(--space-3xl) auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.why-accordion__item {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(45, 138, 78, 0.1);
+  overflow: hidden;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.why-accordion__item:hover {
+  border-color: rgba(45, 138, 78, 0.25);
+  box-shadow: var(--shadow-md);
+}
+
+.why-accordion__item--open {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-lg);
+}
+
+.why-accordion__header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-xl) var(--space-2xl);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  text-align: left;
+  transition: background var(--transition-base);
+}
+
+.why-accordion__header:hover {
+  background: var(--color-bg-alt);
+}
+
+.why-accordion__item--open .why-accordion__header {
+  background: linear-gradient(135deg, var(--color-primary-lighter) 0%, var(--color-warm) 100%);
+}
+
+.why-accordion__icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-alt);
+  border-radius: var(--radius-md);
+}
+
+.why-accordion__item--open .why-accordion__icon {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.why-accordion__title {
+  flex: 1;
+}
+
+.why-accordion__chevron {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--color-primary-lighter);
+  transition: all var(--transition-base);
+}
+
+.why-accordion__item--open .why-accordion__chevron {
+  background: var(--color-primary);
+  color: var(--color-white);
+  transform: rotate(180deg);
+}
+
+.why-accordion__panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              padding 0.3s ease;
+  padding: 0 var(--space-2xl);
+}
+
+.why-accordion__item--open .why-accordion__panel {
+  max-height: 500px;
+  padding: 0 var(--space-2xl) var(--space-2xl);
+}
+
+.why-accordion__panel p {
+  font-size: 1.02rem;
+  line-height: 1.8;
+  color: var(--color-text);
+  padding-left: calc(40px + var(--space-lg));
+}
+
+/* Impact (kept for backwards compat) */
 .why-impacts__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -158,8 +338,14 @@
 }
 
 @media (max-width: 768px) {
+  .why-now-detail__layout,
   .why-problem__layout {
     grid-template-columns: 1fr;
+  }
+
+  .why-now-detail__visual {
+    order: -1;
+    position: static;
   }
 
   .why-problem__image {
@@ -169,5 +355,23 @@
   .why-stats__grid,
   .why-affected__grid {
     grid-template-columns: 1fr;
+  }
+
+  .why-accordion__header {
+    padding: var(--space-lg);
+    font-size: 1rem;
+    gap: var(--space-md);
+  }
+
+  .why-accordion__panel {
+    padding: 0 var(--space-lg);
+  }
+
+  .why-accordion__item--open .why-accordion__panel {
+    padding: 0 var(--space-lg) var(--space-xl);
+  }
+
+  .why-accordion__panel p {
+    padding-left: 0;
   }
 }

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { AnimatedSection } from '../components/AnimatedSection';
+import SEOHead from '../components/SEOHead';
 import './ContactPage.css';
 
 export default function ContactPage() {
@@ -34,6 +35,19 @@ export default function ContactPage() {
 
   return (
     <main className="contact-page" id="contact-page">
+      <SEOHead
+        title="Contact Us — Get Involved with Grow Good Daily"
+        description="Ready to support early financial education? Contact Grow Good Daily to donate, sponsor, volunteer, or partner. Join our movement for children, families, and communities."
+        canonical="https://growgooddaily.com/contact"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'ContactPage',
+          name: 'Contact Grow Good Daily',
+          description: 'Get involved with early financial education. Donate, sponsor, volunteer, or stay connected.',
+          url: 'https://growgooddaily.com/contact',
+          isPartOf: { '@type': 'WebSite', name: 'Grow Good Daily', url: 'https://growgooddaily.com' },
+        }}
+      />
       {/* Page Hero */}
       <section className="page-hero" id="contact-hero">
         <div className="page-hero__bg">

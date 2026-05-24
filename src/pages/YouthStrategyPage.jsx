@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { AnimatedSection } from '../components/AnimatedSection';
+import SEOHead from '../components/SEOHead';
 import './YouthStrategyPage.css';
 
 export default function YouthStrategyPage() {
@@ -195,6 +196,19 @@ export default function YouthStrategyPage() {
 
   return (
     <main className="youth-page" id="youth-strategy-page">
+      <SEOHead
+        title="Youth Strategy — Student Workforce Pipeline & Leadership Network"
+        description="Explore Grow Good Daily's youth strategy: mentorship roles, paid internships, ambassador programs, and career-building opportunities for high school and college students in financial education."
+        canonical="https://growgooddaily.com/youth-strategy"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          name: 'Youth Workforce Pipeline and Global Network',
+          description: 'Student leadership, mentorship, and workforce opportunities through Grow Good Daily.',
+          url: 'https://growgooddaily.com/youth-strategy',
+          isPartOf: { '@type': 'WebSite', name: 'Grow Good Daily', url: 'https://growgooddaily.com' },
+        }}
+      />
       {/* Hero */}
       <section className="page-hero" id="youth-hero">
         <div className="page-hero__bg">

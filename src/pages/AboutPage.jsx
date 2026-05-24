@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { AnimatedSection } from '../components/AnimatedSection';
+import SEOHead from '../components/SEOHead';
 import './AboutPage.css';
 
 export default function AboutPage() {
@@ -16,6 +17,26 @@ export default function AboutPage() {
 
   return (
     <main className="about-page" id="about-page">
+      <SEOHead
+        title="About Grow Good Daily — Meet the Founder & Our Mission"
+        description="Learn about Grow Good Daily's mission, philosophy, and values. Meet founder Sam X Renick, a 25-year veteran of children's financial education and creator of Sammy Rabbit."
+        canonical="https://growgooddaily.com/about"
+        ogImage="https://growgooddaily.com/images/founder-portrait.png"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'AboutPage',
+          name: 'About Grow Good Daily',
+          description: 'Mission, philosophy, values, and founder profile for Grow Good Daily.',
+          url: 'https://growgooddaily.com/about',
+          mainEntity: {
+            '@type': 'Person',
+            name: 'Sam X Renick',
+            jobTitle: 'Founder',
+            description: 'Creator of Sammy Rabbit and 25-year veteran of children\'s financial education.',
+            worksFor: { '@type': 'Organization', name: 'Grow Good Daily' },
+          },
+        }}
+      />
       {/* Page Hero */}
       <section className="page-hero" id="about-hero">
         <div className="page-hero__bg">

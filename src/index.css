@@ -66,6 +66,13 @@
   /* Container */
   --container-max: 1200px;
   --container-narrow: 800px;
+
+  /* Blog-specific tokens */
+  --color-code-bg: #1a1a2e;
+  --color-code-text: #e2e8f0;
+  --color-blockquote-border: var(--color-primary-light);
+  --color-tag-bg: var(--color-primary-lighter);
+  --color-tag-text: var(--color-primary-dark);
 }
 
 /* ===========================
