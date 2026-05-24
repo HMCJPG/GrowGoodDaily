@@ -3,9 +3,10 @@ import { AnimatedSection } from '../components/AnimatedSection';
 import SEOHead from '../components/SEOHead';
 import './ContactPage.css';
 
-// Formsubmit.co AJAX endpoint. First submission to a new email triggers a
-// one-time activation link sent to the destination address.
-const CONTACT_ENDPOINT = 'https://formsubmit.co/ajax/sammywebtesting@gmail.com';
+// Web3Forms endpoint + access key. The key is tied to the destination email
+// on Web3Forms' side; rotate it from web3forms.com if it ever leaks.
+const CONTACT_ENDPOINT = 'https://api.web3forms.com/submit';
+const WEB3FORMS_ACCESS_KEY = '388d8dbe-0249-423b-91bc-c42645f8559b';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -45,15 +46,17 @@ export default function ContactPage() {
           Accept: 'application/json',
         },
         body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: `Grow Good Daily contact: ${formData.interest}`,
+          from_name: 'Grow Good Daily Contact Form',
           ...formData,
-          _subject: `Grow Good Daily contact: ${formData.interest}`,
-          _template: 'table',
         }),
       });
 
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data?.message || 'Submission failed. Please try again.');
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || 'Submission failed. Please try again.');
       }
 
       setIsSubmitted(true);
