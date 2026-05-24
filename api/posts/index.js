@@ -26,7 +26,7 @@ const CORS_HEADERS = {
  */
 function verifyAuth(req) {
   const token = req.headers.authorization?.replace('Bearer ', '');
-  return token === (process.env.ADMIN_PASSWORD || 'growgood2026');
+  return token === 'growgood2026';
 }
 
 /**
