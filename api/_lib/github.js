@@ -161,3 +161,33 @@ export function stripInternal(post) {
   const { _sha, ...rest } = post;
   return rest;
 }
+
+/**
+ * Upload a binary file (already base64-encoded) to the configured repo at
+ * the given path. Returns the raw.githubusercontent.com URL suitable for
+ * direct embedding in <img src=...>.
+ *
+ * @param {string} path   - repo-relative path e.g. "content/images/foo.jpg"
+ * @param {string} contentBase64 - base64-encoded file bytes (no data URL prefix)
+ */
+export async function uploadFile(path, contentBase64) {
+  const res = await fetch(`${API_BASE}/${path}`, {
+    method: 'PUT',
+    headers: ghHeaders({ 'Content-Type': 'application/json' }),
+    body: JSON.stringify({
+      message: `Upload: ${path}`,
+      content: contentBase64,
+      branch: GITHUB_BRANCH,
+    }),
+  });
+
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(
+      `GitHub upload failed: ${res.status} ${err.message || ''}`,
+    );
+  }
+
+  const data = await res.json();
+  return data.content?.download_url;
+}

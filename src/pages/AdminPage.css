@@ -431,6 +431,24 @@
 }
 
 /* Image preview */
+.admin__upload-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+.admin__upload-input {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+}
+
+.admin__upload-status {
+  color: var(--color-medium);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
 .admin__image-preview {
   margin-top: var(--space-sm);
   max-height: 100px;

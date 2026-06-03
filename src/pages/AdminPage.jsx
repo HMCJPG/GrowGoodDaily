@@ -277,7 +277,69 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
   const [published, setPublished] = useState(existingPost?.published ?? false);
   const [content, setContent] = useState(existingPost?.content || '');
   const [saving, setSaving] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
   const [toast, setToast] = useState(null);
+
+  async function handleCoverImageUpload(e) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Cap at 3MB so the base64-encoded JSON body stays under Vercel's
+    // 4.5MB request limit (base64 inflates payload by ~33%).
+    const MAX_BYTES = 3 * 1024 * 1024;
+    if (file.size > MAX_BYTES) {
+      setToast({
+        message: 'Image too large. Please use a file under 3 MB.',
+        type: 'error',
+      });
+      e.target.value = '';
+      return;
+    }
+
+    setUploadingImage(true);
+    try {
+      const base64 = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const result = reader.result;
+          const comma = result.indexOf(',');
+          resolve(comma >= 0 ? result.slice(comma + 1) : result);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          filename: file.name,
+          mimeType: file.type,
+          contentBase64: base64,
+        }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setCoverImage(data.url);
+        setToast({ message: 'Image uploaded!', type: 'success' });
+      } else {
+        const errData = await res.json().catch(() => ({}));
+        setToast({
+          message: errData.error || 'Upload failed',
+          type: 'error',
+        });
+      }
+    } catch {
+      setToast({ message: 'Upload failed. Please try again.', type: 'error' });
+    } finally {
+      setUploadingImage(false);
+      e.target.value = ''; // reset so the same file can be re-picked
+    }
+  }
 
   // Auto-generate slug from title (only for new posts)
   function handleTitleChange(value) {
@@ -388,14 +450,27 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
           </div>
 
           <div className="admin__field">
-            <label className="admin__label" htmlFor="editor-cover">Cover Image URL</label>
+            <label className="admin__label" htmlFor="editor-cover-file">Cover Image</label>
+            <div className="admin__upload-row">
+              <input
+                id="editor-cover-file"
+                type="file"
+                accept="image/jpeg,image/png,image/gif,image/webp,image/svg+xml"
+                onChange={handleCoverImageUpload}
+                disabled={uploadingImage}
+                className="admin__upload-input"
+              />
+              {uploadingImage && (
+                <span className="admin__upload-status">Uploading…</span>
+              )}
+            </div>
             <input
               id="editor-cover"
               className="admin__input"
               type="text"
               value={coverImage}
               onChange={(e) => setCoverImage(e.target.value)}
-              placeholder="https://example.com/image.jpg"
+              placeholder="…or paste an image URL"
             />
             {coverImage && (
               <div className="admin__image-preview">
