@@ -276,6 +276,9 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
   const [tagsInput, setTagsInput] = useState((existingPost?.tags || []).join(', '));
   const [published, setPublished] = useState(existingPost?.published ?? false);
   const [content, setContent] = useState(existingPost?.content || '');
+  const [seoTitle, setSeoTitle] = useState(existingPost?.seoTitle || '');
+  const [seoDescription, setSeoDescription] = useState(existingPost?.seoDescription || '');
+  const [seoKeywords, setSeoKeywords] = useState(existingPost?.seoKeywords || '');
   const [saving, setSaving] = useState(false);
   const [uploadingImage, setUploadingImage] = useState(false);
   const [toast, setToast] = useState(null);
@@ -371,6 +374,9 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
         tags: parsedTags,
         published,
         content,
+        seoTitle,
+        seoDescription,
+        seoKeywords,
       };
 
       const url = isEditing ? `${API_BASE}/${existingPost.slug}` : API_BASE;
@@ -496,6 +502,59 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
                 ))}
               </div>
             )}
+          </div>
+
+          <div className="admin__seo-box" id="editor-seo">
+            <div className="admin__seo-header">
+              <h3 className="admin__seo-title">SEO</h3>
+              <p className="admin__seo-help">
+                All fields optional — left blank, they fall back to the post title, excerpt, and tags.
+              </p>
+            </div>
+
+            <div className="admin__field">
+              <label className="admin__label" htmlFor="editor-seo-title">
+                SEO Title
+              </label>
+              <input
+                id="editor-seo-title"
+                className="admin__input"
+                type="text"
+                value={seoTitle}
+                onChange={(e) => setSeoTitle(e.target.value)}
+                placeholder="Shown in search results. ~50–60 chars recommended."
+                maxLength={80}
+              />
+            </div>
+
+            <div className="admin__field">
+              <label className="admin__label" htmlFor="editor-seo-description">
+                Meta Description
+              </label>
+              <textarea
+                id="editor-seo-description"
+                className="admin__textarea"
+                rows={3}
+                value={seoDescription}
+                onChange={(e) => setSeoDescription(e.target.value)}
+                placeholder="Snippet shown under the title in search results. ~150–160 chars recommended."
+                maxLength={300}
+              />
+            </div>
+
+            <div className="admin__field">
+              <label className="admin__label" htmlFor="editor-seo-keywords">
+                Keywords
+              </label>
+              <input
+                id="editor-seo-keywords"
+                className="admin__input"
+                type="text"
+                value={seoKeywords}
+                onChange={(e) => setSeoKeywords(e.target.value)}
+                placeholder="comma, separated, keywords"
+              />
+            </div>
           </div>
 
           <div className="admin__field">

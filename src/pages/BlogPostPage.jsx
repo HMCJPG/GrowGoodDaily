@@ -116,8 +116,9 @@ export default function BlogPostPage() {
   return (
     <main className="blog-post-page" id="blog-post-page">
       <SEOHead
-        title={post.title}
-        description={post.excerpt || ''}
+        title={post.seoTitle?.trim() || post.title}
+        description={post.seoDescription?.trim() || post.excerpt || ''}
+        keywords={post.seoKeywords?.trim() || (post.tags || []).join(', ') || undefined}
         canonical={`https://growgooddaily.com/blog/${post.slug}`}
         ogType="article"
         ogImage={post.coverImage || undefined}

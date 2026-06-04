@@ -20,6 +20,7 @@ export default function SEOHead({
   ogImage = 'https://growgooddaily.com/images/hero-banner.png',
   jsonLd,
   noIndex = false,
+  keywords,
 }) {
   const siteName = 'Grow Good Daily';
   const fullTitle = title.includes(siteName) ? title : `${title} | ${siteName}`;
@@ -29,6 +30,7 @@ export default function SEOHead({
       {/* Primary */}
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
+      {keywords && <meta name="keywords" content={keywords} />}
       {canonical && <link rel="canonical" href={canonical} />}
       {noIndex && <meta name="robots" content="noindex, nofollow" />}
 
