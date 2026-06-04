@@ -48,10 +48,13 @@ export default function SEOHead({
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
 
-      {/* JSON-LD */}
-      {jsonLd && (
-        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
-      )}
+      {/* JSON-LD — accepts a single schema object or an array of them */}
+      {jsonLd &&
+        (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).map((schema, i) => (
+          <script key={i} type="application/ld+json">
+            {JSON.stringify(schema)}
+          </script>
+        ))}
     </Helmet>
   );
 }

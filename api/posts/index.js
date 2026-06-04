@@ -95,12 +95,15 @@ async function handlePost(req, res) {
     excerpt = '',
     coverImage = '',
     coverImageAlt = '',
+    socialImage = '',
     tags = [],
     published = false,
     seoTitle = '',
     seoDescription = '',
     seoKeywords = '',
     noIndex = false,
+    author = '',
+    authorUrl = '',
   } = req.body ?? {};
 
   if (!title) return res.status(400).json({ error: 'Title is required' });
@@ -130,12 +133,15 @@ async function handlePost(req, res) {
     excerpt,
     coverImage,
     coverImageAlt,
+    socialImage,
     tags,
     published,
     seoTitle,
     seoDescription,
     seoKeywords,
     noIndex,
+    author,
+    authorUrl,
     publishedDate: now,
     updatedDate: now,
   };

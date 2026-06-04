@@ -281,6 +281,9 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
   const [seoDescription, setSeoDescription] = useState(existingPost?.seoDescription || '');
   const [seoKeywords, setSeoKeywords] = useState(existingPost?.seoKeywords || '');
   const [noIndex, setNoIndex] = useState(existingPost?.noIndex ?? false);
+  const [socialImage, setSocialImage] = useState(existingPost?.socialImage || '');
+  const [author, setAuthor] = useState(existingPost?.author || '');
+  const [authorUrl, setAuthorUrl] = useState(existingPost?.authorUrl || '');
   const [saving, setSaving] = useState(false);
   const [uploadingImage, setUploadingImage] = useState(false);
   const [toast, setToast] = useState(null);
@@ -374,6 +377,7 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
         excerpt,
         coverImage,
         coverImageAlt,
+        socialImage,
         tags: parsedTags,
         published,
         content,
@@ -381,6 +385,8 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
         seoDescription,
         seoKeywords,
         noIndex,
+        author,
+        authorUrl,
       };
 
       const url = isEditing ? `${API_BASE}/${existingPost.slug}` : API_BASE;
@@ -522,6 +528,34 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
             )}
           </div>
 
+          <div className="admin__field">
+            <label className="admin__label" htmlFor="editor-author">
+              Author
+            </label>
+            <input
+              id="editor-author"
+              className="admin__input"
+              type="text"
+              value={author}
+              onChange={(e) => setAuthor(e.target.value)}
+              placeholder="Sam X Renick (leave blank to use default)"
+            />
+          </div>
+
+          <div className="admin__field">
+            <label className="admin__label" htmlFor="editor-author-url">
+              Author URL (optional)
+            </label>
+            <input
+              id="editor-author-url"
+              className="admin__input"
+              type="text"
+              value={authorUrl}
+              onChange={(e) => setAuthorUrl(e.target.value)}
+              placeholder="https://example.com/about-the-author"
+            />
+          </div>
+
           <div className="admin__seo-box" id="editor-seo">
             <div className="admin__seo-header">
               <h3 className="admin__seo-title">SEO</h3>
@@ -572,6 +606,29 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
                 onChange={(e) => setSeoKeywords(e.target.value)}
                 placeholder="comma, separated, keywords"
               />
+            </div>
+
+            <div className="admin__field">
+              <label className="admin__label" htmlFor="editor-social-image">
+                Social Preview Image URL
+              </label>
+              <input
+                id="editor-social-image"
+                className="admin__input"
+                type="text"
+                value={socialImage}
+                onChange={(e) => setSocialImage(e.target.value)}
+                placeholder="Override og:image / Twitter card image (defaults to cover image)"
+              />
+              {socialImage && (
+                <div className="admin__image-preview">
+                  <img
+                    src={socialImage}
+                    alt="Social preview"
+                    onError={(e) => (e.target.style.display = 'none')}
+                  />
+                </div>
+              )}
             </div>
 
             <div className="admin__field">

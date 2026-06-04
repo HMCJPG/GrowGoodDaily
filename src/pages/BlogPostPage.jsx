@@ -102,8 +102,12 @@ export default function BlogPostPage() {
     (post.tags && post.tags.length ? post.tags.join(', ') : undefined);
   const articleSection =
     post.tags && post.tags.length ? post.tags[0] : undefined;
+  const authorName = post.author?.trim() || 'Sam X Renick';
+  const authorUrl = post.authorUrl?.trim() || 'https://growgooddaily.com/about';
+  const socialPreviewImage =
+    post.socialImage?.trim() || post.coverImage || undefined;
 
-  const jsonLd = {
+  const blogPostingSchema = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: post.seoTitle?.trim() || post.title,
@@ -121,8 +125,8 @@ export default function BlogPostPage() {
     },
     author: {
       '@type': 'Person',
-      name: 'Sam X Renick',
-      url: 'https://growgooddaily.com/about',
+      name: authorName,
+      url: authorUrl,
     },
     publisher: {
       '@type': 'Organization',
@@ -135,6 +139,33 @@ export default function BlogPostPage() {
     },
   };
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://growgooddaily.com/',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Blog',
+        item: 'https://growgooddaily.com/blog',
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: post.title,
+        item: canonicalUrl,
+      },
+    ],
+  };
+
+  const jsonLd = [blogPostingSchema, breadcrumbSchema];
+
   return (
     <main className="blog-post-page" id="blog-post-page">
       <SEOHead
@@ -143,7 +174,7 @@ export default function BlogPostPage() {
         keywords={post.seoKeywords?.trim() || (post.tags || []).join(', ') || undefined}
         canonical={canonicalUrl}
         ogType="article"
-        ogImage={post.coverImage || undefined}
+        ogImage={socialPreviewImage}
         jsonLd={jsonLd}
         noIndex={!!post.noIndex}
       />
@@ -211,8 +242,10 @@ export default function BlogPostPage() {
               ✍️
             </div>
             <div className="blog-post__author-info">
-              <h4>Written by Sam X Renick</h4>
-              <p>Founder of Grow Good Daily and creator of Sammy Rabbit — helping children and families build stronger financial futures for over 25 years.</p>
+              <h4>Written by {authorName}</h4>
+              {authorName === 'Sam X Renick' && (
+                <p>Founder of Grow Good Daily and creator of Sammy Rabbit — helping children and families build stronger financial futures for over 25 years.</p>
+              )}
             </div>
           </div>
         </AnimatedSection>
