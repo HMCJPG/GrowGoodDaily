@@ -8,15 +8,24 @@
   min-height: 420px;
   display: flex;
   align-items: flex-end;
-  background-size: cover;
-  background-position: center;
   background-color: var(--color-dark);
   overflow: hidden;
+}
+
+.blog-post__hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
 }
 
 .blog-post__hero-overlay {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0.1) 0%,

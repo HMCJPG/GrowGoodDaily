@@ -93,23 +93,45 @@ export default function BlogPostPage() {
 
   const readingTime = calcReadingTime(post.content);
   const hasCoverImage = !!post.coverImage;
+  const wordCount = post.content
+    ? post.content.trim().split(/\s+/).length
+    : 0;
+  const canonicalUrl = `https://growgooddaily.com/blog/${post.slug}`;
+  const keywordList =
+    post.seoKeywords?.trim() ||
+    (post.tags && post.tags.length ? post.tags.join(', ') : undefined);
+  const articleSection =
+    post.tags && post.tags.length ? post.tags[0] : undefined;
 
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
-    headline: post.title,
-    description: post.excerpt || '',
+    headline: post.seoTitle?.trim() || post.title,
+    description: post.seoDescription?.trim() || post.excerpt || '',
     image: post.coverImage || undefined,
     datePublished: post.publishedDate,
     dateModified: post.updatedDate || post.publishedDate,
+    wordCount: wordCount || undefined,
+    inLanguage: 'en-US',
+    keywords: keywordList,
+    articleSection,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': canonicalUrl,
+    },
     author: {
       '@type': 'Person',
       name: 'Sam X Renick',
+      url: 'https://growgooddaily.com/about',
     },
     publisher: {
       '@type': 'Organization',
       name: 'Grow Good Daily',
       url: 'https://growgooddaily.com',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://growgooddaily.com/favicon.svg',
+      },
     },
   };
 
@@ -119,19 +141,30 @@ export default function BlogPostPage() {
         title={post.seoTitle?.trim() || post.title}
         description={post.seoDescription?.trim() || post.excerpt || ''}
         keywords={post.seoKeywords?.trim() || (post.tags || []).join(', ') || undefined}
-        canonical={`https://growgooddaily.com/blog/${post.slug}`}
+        canonical={canonicalUrl}
         ogType="article"
         ogImage={post.coverImage || undefined}
         jsonLd={jsonLd}
+        noIndex={!!post.noIndex}
       />
 
       {/* Hero */}
       <header
         className={`blog-post__hero ${hasCoverImage ? '' : 'blog-post__hero--no-image'}`}
-        style={hasCoverImage ? { backgroundImage: `url(${post.coverImage})` } : undefined}
         id="blog-post-hero"
       >
-        {hasCoverImage && <div className="blog-post__hero-overlay" />}
+        {hasCoverImage && (
+          <>
+            <img
+              className="blog-post__hero-image"
+              src={post.coverImage}
+              alt={post.coverImageAlt || post.title}
+              loading="eager"
+              fetchpriority="high"
+            />
+            <div className="blog-post__hero-overlay" />
+          </>
+        )}
         <div className="blog-post__hero-content">
           <AnimatedSection animation="fade-up">
             <h1>{post.title}</h1>

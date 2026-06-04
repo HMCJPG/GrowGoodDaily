@@ -273,12 +273,14 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
   const [slug, setSlug] = useState(existingPost?.slug || '');
   const [excerpt, setExcerpt] = useState(existingPost?.excerpt || '');
   const [coverImage, setCoverImage] = useState(existingPost?.coverImage || '');
+  const [coverImageAlt, setCoverImageAlt] = useState(existingPost?.coverImageAlt || '');
   const [tagsInput, setTagsInput] = useState((existingPost?.tags || []).join(', '));
   const [published, setPublished] = useState(existingPost?.published ?? false);
   const [content, setContent] = useState(existingPost?.content || '');
   const [seoTitle, setSeoTitle] = useState(existingPost?.seoTitle || '');
   const [seoDescription, setSeoDescription] = useState(existingPost?.seoDescription || '');
   const [seoKeywords, setSeoKeywords] = useState(existingPost?.seoKeywords || '');
+  const [noIndex, setNoIndex] = useState(existingPost?.noIndex ?? false);
   const [saving, setSaving] = useState(false);
   const [uploadingImage, setUploadingImage] = useState(false);
   const [toast, setToast] = useState(null);
@@ -371,12 +373,14 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
         slug,
         excerpt,
         coverImage,
+        coverImageAlt,
         tags: parsedTags,
         published,
         content,
         seoTitle,
         seoDescription,
         seoKeywords,
+        noIndex,
       };
 
       const url = isEditing ? `${API_BASE}/${existingPost.slug}` : API_BASE;
@@ -486,6 +490,20 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
           </div>
 
           <div className="admin__field">
+            <label className="admin__label" htmlFor="editor-cover-alt">
+              Cover Image Alt Text
+            </label>
+            <input
+              id="editor-cover-alt"
+              className="admin__input"
+              type="text"
+              value={coverImageAlt}
+              onChange={(e) => setCoverImageAlt(e.target.value)}
+              placeholder="Describe the image for screen readers and Google Images"
+            />
+          </div>
+
+          <div className="admin__field">
             <label className="admin__label" htmlFor="editor-tags">Tags</label>
             <input
               id="editor-tags"
@@ -554,6 +572,24 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
                 onChange={(e) => setSeoKeywords(e.target.value)}
                 placeholder="comma, separated, keywords"
               />
+            </div>
+
+            <div className="admin__field">
+              <label className="admin__checkbox-label" htmlFor="editor-noindex">
+                <input
+                  id="editor-noindex"
+                  type="checkbox"
+                  checked={noIndex}
+                  onChange={(e) => setNoIndex(e.target.checked)}
+                />
+                <span>
+                  <strong>Hide from search engines</strong>
+                  <span className="admin__seo-help admin__seo-help--inline">
+                    Adds <code>noindex, nofollow</code> meta tag. Use for stale, archived,
+                    or low-quality posts you don't want appearing in Google.
+                  </span>
+                </span>
+              </label>
             </div>
           </div>
 
