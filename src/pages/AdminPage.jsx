@@ -453,6 +453,28 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
     wrapSelection(`<span style="font-size: ${size}">`, '</span>', 'sized text');
   }
 
+  function handleHeading(level) {
+    if (!level) return;
+    const hashes = '#'.repeat(Number(level));
+    // Surround with blank lines so the heading renders as its own block,
+    // regardless of whether the cursor was mid-paragraph.
+    wrapSelection(`\n\n${hashes} `, '\n\n', `Heading ${level}`);
+  }
+
+  // Soft line break — like Shift+Enter in a word processor. Single <br>.
+  function handleLineBreak() {
+    wrapSelection('<br>\n', '', '');
+  }
+
+  // Explicit vertical gap that survives markdown's blank-line collapsing.
+  function handleSpacer() {
+    wrapSelection(
+      '\n\n<div style="height: 2rem"></div>\n\n',
+      '',
+      '',
+    );
+  }
+
   async function handleInlineImageUpload(e) {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -857,6 +879,23 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
               role="toolbar"
               aria-label="Formatting"
             >
+              <select
+                className="admin__toolbar-select"
+                aria-label="Heading level"
+                defaultValue=""
+                onChange={(e) => {
+                  handleHeading(e.target.value);
+                  e.target.selectedIndex = 0;
+                }}
+              >
+                <option value="">Heading…</option>
+                <option value="2">H2 — Section</option>
+                <option value="3">H3 — Subsection</option>
+                <option value="4">H4 — Minor</option>
+              </select>
+
+              <span className="admin__toolbar-sep" aria-hidden="true" />
+
               <button
                 type="button"
                 className="admin__toolbar-btn"
@@ -916,6 +955,25 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
                 <option value="1.5rem">X-Large</option>
                 <option value="2rem">Huge</option>
               </select>
+
+              <span className="admin__toolbar-sep" aria-hidden="true" />
+
+              <button
+                type="button"
+                className="admin__toolbar-btn"
+                onClick={handleLineBreak}
+                title="Soft line break — single <br>"
+              >
+                ↵ Br
+              </button>
+              <button
+                type="button"
+                className="admin__toolbar-btn"
+                onClick={handleSpacer}
+                title="Vertical spacer — markdown collapses blank lines, this doesn't"
+              >
+                ⇕ Gap
+              </button>
 
               <span className="admin__toolbar-sep" aria-hidden="true" />
 
