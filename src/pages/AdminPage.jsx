@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import SEOHead from '../components/SEOHead';
 import MarkdownRenderer from '../components/blog/MarkdownRenderer';
 import './AdminPage.css';
@@ -285,8 +285,61 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
   const [author, setAuthor] = useState(existingPost?.author || '');
   const [authorUrl, setAuthorUrl] = useState(existingPost?.authorUrl || '');
   const [saving, setSaving] = useState(false);
+  const [loadingPost, setLoadingPost] = useState(isEditing);
   const [uploadingImage, setUploadingImage] = useState(false);
+  const [insertingImage, setInsertingImage] = useState(false);
   const [toast, setToast] = useState(null);
+  const contentRef = useRef(null);
+  const inlineImageInputRef = useRef(null);
+
+  // When editing, the list endpoint strips `content` for performance, so the
+  // existingPost prop is missing it. Fetch the full record once on mount so
+  // the textarea isn't initialized to empty (which used to silently wipe
+  // content on save).
+  useEffect(() => {
+    if (!isEditing) return;
+    let cancelled = false;
+
+    async function fetchFullPost() {
+      try {
+        const res = await fetch(`${API_BASE}/${existingPost.slug}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (!res.ok) throw new Error('fetch failed');
+        const full = await res.json();
+        if (cancelled) return;
+
+        // Only backfill fields that the list view didn't supply. We never
+        // overwrite something Sam is actively typing — just fill in what's
+        // still at its initial empty value.
+        setContent((cur) => cur || full.content || '');
+        setExcerpt((cur) => cur || full.excerpt || '');
+        setCoverImage((cur) => cur || full.coverImage || '');
+        setCoverImageAlt((cur) => cur || full.coverImageAlt || '');
+        setSocialImage((cur) => cur || full.socialImage || '');
+        setSeoTitle((cur) => cur || full.seoTitle || '');
+        setSeoDescription((cur) => cur || full.seoDescription || '');
+        setSeoKeywords((cur) => cur || full.seoKeywords || '');
+        setAuthor((cur) => cur || full.author || '');
+        setAuthorUrl((cur) => cur || full.authorUrl || '');
+      } catch {
+        if (!cancelled) {
+          setToast({
+            message: 'Could not load full post — be careful saving.',
+            type: 'error',
+          });
+        }
+      } finally {
+        if (!cancelled) setLoadingPost(false);
+      }
+    }
+
+    fetchFullPost();
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function handleCoverImageUpload(e) {
     const file = e.target.files?.[0];
@@ -349,6 +402,126 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
     }
   }
 
+  // ─── Formatting toolbar helpers ───────────────────────────────────────────
+
+  // Read a File as a base64 string with the data-URL prefix stripped.
+  function readAsBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const result = reader.result;
+        const comma = result.indexOf(',');
+        resolve(comma >= 0 ? result.slice(comma + 1) : result);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // Wrap whatever is currently selected in the content textarea with `left`
+  // and `right`. If nothing is selected, insert `placeholder` so the user
+  // can see the formatting marker and replace the text.
+  function wrapSelection(left, right, placeholder) {
+    const ta = contentRef.current;
+    if (!ta) return;
+    const start = ta.selectionStart;
+    const end = ta.selectionEnd;
+    const selected = content.slice(start, end);
+    const inner = selected || placeholder;
+    const newContent =
+      content.slice(0, start) + left + inner + right + content.slice(end);
+    setContent(newContent);
+    // Re-focus the textarea and put the cursor at the end of the wrapped text.
+    requestAnimationFrame(() => {
+      ta.focus();
+      const pos = start + left.length + inner.length;
+      ta.setSelectionRange(pos, pos);
+    });
+  }
+
+  const handleBold = () => wrapSelection('**', '**', 'bold text');
+  const handleItalic = () => wrapSelection('*', '*', 'italic text');
+  const handleUnderline = () => wrapSelection('<u>', '</u>', 'underlined text');
+
+  function handleFontChange(font) {
+    if (!font) return;
+    wrapSelection(`<span style="font-family: ${font}">`, '</span>', 'styled text');
+  }
+
+  function handleSizeChange(size) {
+    if (!size) return;
+    wrapSelection(`<span style="font-size: ${size}">`, '</span>', 'sized text');
+  }
+
+  async function handleInlineImageUpload(e) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const MAX_BYTES = 3 * 1024 * 1024;
+    if (file.size > MAX_BYTES) {
+      setToast({ message: 'Image too large (3 MB max).', type: 'error' });
+      e.target.value = '';
+      return;
+    }
+
+    setInsertingImage(true);
+    try {
+      const base64 = await readAsBase64(file);
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          filename: file.name,
+          mimeType: file.type,
+          contentBase64: base64,
+        }),
+      });
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error || 'Upload failed');
+      }
+
+      const data = await res.json();
+      // Derive a friendly alt from the filename (strip extension + clean up).
+      const altGuess = file.name
+        .replace(/\.[^.]+$/, '')
+        .replace(/[-_]+/g, ' ')
+        .trim();
+      const markdown = `\n\n![${altGuess}](${data.url})\n\n`;
+
+      // Insert the markdown at the cursor position in the content textarea.
+      const ta = contentRef.current;
+      if (ta) {
+        const start = ta.selectionStart;
+        const end = ta.selectionEnd;
+        const newContent =
+          content.slice(0, start) + markdown + content.slice(end);
+        setContent(newContent);
+        requestAnimationFrame(() => {
+          ta.focus();
+          const pos = start + markdown.length;
+          ta.setSelectionRange(pos, pos);
+        });
+      } else {
+        setContent(content + markdown);
+      }
+
+      setToast({ message: 'Image inserted!', type: 'success' });
+    } catch (err) {
+      setToast({
+        message: err.message || 'Upload failed',
+        type: 'error',
+      });
+    } finally {
+      setInsertingImage(false);
+      e.target.value = '';
+    }
+  }
+
   // Auto-generate slug from title (only for new posts)
   function handleTitleChange(value) {
     setTitle(value);
@@ -366,6 +539,15 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
     e.preventDefault();
     if (!title.trim() || !slug.trim()) {
       setToast({ message: 'Title and slug are required', type: 'error' });
+      return;
+    }
+    // Don't let Sam save before the full post has loaded — otherwise we'd
+    // PUT an empty `content` field and wipe the saved version on disk.
+    if (loadingPost) {
+      setToast({
+        message: 'Still loading the post — please wait a moment.',
+        type: 'error',
+      });
       return;
     }
 
@@ -669,13 +851,104 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
           </div>
 
           <div className="admin__field">
-            <label className="admin__label" htmlFor="editor-content">Content (Markdown)</label>
+            <label className="admin__label" htmlFor="editor-content">Content</label>
+            <div
+              className="admin__editor-toolbar"
+              role="toolbar"
+              aria-label="Formatting"
+            >
+              <button
+                type="button"
+                className="admin__toolbar-btn"
+                onClick={handleBold}
+                title="Bold (wraps selection in **)"
+              >
+                <strong>B</strong>
+              </button>
+              <button
+                type="button"
+                className="admin__toolbar-btn"
+                onClick={handleItalic}
+                title="Italic (wraps selection in *)"
+              >
+                <em>I</em>
+              </button>
+              <button
+                type="button"
+                className="admin__toolbar-btn"
+                onClick={handleUnderline}
+                title="Underline (wraps selection in <u>)"
+              >
+                <u>U</u>
+              </button>
+
+              <span className="admin__toolbar-sep" aria-hidden="true" />
+
+              <select
+                className="admin__toolbar-select"
+                aria-label="Font family"
+                defaultValue=""
+                onChange={(e) => {
+                  handleFontChange(e.target.value);
+                  e.target.selectedIndex = 0;
+                }}
+              >
+                <option value="">Font…</option>
+                <option value="Inter, sans-serif">Sans-serif (Inter)</option>
+                <option value="Outfit, sans-serif">Display (Outfit)</option>
+                <option value="Georgia, serif">Serif (Georgia)</option>
+                <option value="'Courier New', monospace">Monospace</option>
+              </select>
+
+              <select
+                className="admin__toolbar-select"
+                aria-label="Font size"
+                defaultValue=""
+                onChange={(e) => {
+                  handleSizeChange(e.target.value);
+                  e.target.selectedIndex = 0;
+                }}
+              >
+                <option value="">Size…</option>
+                <option value="0.85rem">Small</option>
+                <option value="1rem">Normal</option>
+                <option value="1.25rem">Large</option>
+                <option value="1.5rem">X-Large</option>
+                <option value="2rem">Huge</option>
+              </select>
+
+              <span className="admin__toolbar-sep" aria-hidden="true" />
+
+              <input
+                ref={inlineImageInputRef}
+                id="editor-inline-image"
+                type="file"
+                accept="image/jpeg,image/png,image/gif,image/webp,image/svg+xml"
+                style={{ display: 'none' }}
+                onChange={handleInlineImageUpload}
+              />
+              <button
+                type="button"
+                className="admin__toolbar-btn"
+                onClick={() => inlineImageInputRef.current?.click()}
+                disabled={insertingImage}
+                title="Upload an image and insert it at the cursor"
+              >
+                {insertingImage ? 'Inserting…' : '🖼 Image'}
+              </button>
+            </div>
             <textarea
               id="editor-content"
+              ref={contentRef}
               className="admin__textarea admin__content-editor"
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              placeholder="Write your post in Markdown…"
+              placeholder={
+                loadingPost
+                  ? 'Loading post content…'
+                  : 'Write your post in Markdown. Use the toolbar above for quick formatting.'
+              }
+              disabled={loadingPost}
             />
           </div>
 
@@ -683,10 +956,10 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
             <button
               className="admin__btn admin__btn--primary"
               type="submit"
-              disabled={saving}
+              disabled={saving || loadingPost}
               id="editor-save-btn"
             >
-              {saving ? 'Saving…' : 'Save Post'}
+              {saving ? 'Saving…' : loadingPost ? 'Loading…' : 'Save Post'}
             </button>
             <button
               className="admin__btn admin__btn--secondary"
