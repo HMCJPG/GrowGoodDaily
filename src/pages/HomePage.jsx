@@ -59,11 +59,20 @@ export default function HomePage() {
               Financial education starts too late.<br />
               <span className="hero__title-highlight">We're changing that.</span>
             </h1>
-            <p className="hero__subtitle animate-fade-up delay-2">
+            {/* Desktop / tablet — full pitch */}
+            <p className="hero__subtitle hero__subtitle--desktop animate-fade-up delay-2">
               Grow Good Daily is building a whole-community model that brings financial education to young people earlier, delivered through the people closest to them: parents, high school and college mentors, schools, and local enterprises all working toward the same goal. Because a lesson lands differently when it comes from someone who looks like you or loves you.
             </p>
-            <p className="hero__subtitle animate-fade-up delay-2" style={{ marginTop: 'var(--space-md)' }}>
+            <p
+              className="hero__subtitle hero__subtitle--desktop animate-fade-up delay-2"
+              style={{ marginTop: 'var(--space-md)' }}
+            >
               We focus our heart and prioritize resources on underserved communities, because where a child starts should never determine where they can go.
+            </p>
+
+            {/* Mobile — condensed version of the same idea */}
+            <p className="hero__subtitle hero__subtitle--mobile animate-fade-up delay-2">
+              Grow Good Daily brings financial education to young people earlier — through the parents, mentors, and schools closest to them. Because a lesson lands differently from someone who looks like you. We focus on underserved communities, because where a child starts shouldn&apos;t decide where they can go.
             </p>
             <div className="btn-group animate-fade-up delay-3">
               <Link to="/contact" className="btn btn--accent btn--lg" id="hero-cta-primary">

@@ -81,6 +81,11 @@
   max-width: 620px;
 }
 
+/* Default (desktop / tablet): show the full pitch, hide the condensed copy. */
+.hero__subtitle--mobile {
+  display: none;
+}
+
 .hero__credibility {
   margin-top: var(--space-xl);
   font-size: 0.9rem !important;
@@ -918,6 +923,15 @@
 @media (max-width: 768px) {
   .hero__content {
     padding-top: 40px;
+  }
+
+  /* On mobile, swap the long subtitle for the condensed one. */
+  .hero__subtitle--desktop {
+    display: none;
+  }
+
+  .hero__subtitle--mobile {
+    display: block;
   }
 
   .big-idea__grid {
