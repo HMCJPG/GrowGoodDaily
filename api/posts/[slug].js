@@ -112,7 +112,9 @@ async function handlePut(req, res, slug) {
     slug: newSlug,
     updatedDate: now,
     id: existing.id,
-    publishedDate: existing.publishedDate,
+    // publishedDate is now editable — keep whatever's in updates, falling
+    // back to the original when the client doesn't send one at all.
+    publishedDate: updates.publishedDate || existing.publishedDate,
   };
 
   // Don't leak _sha into the persisted JSON

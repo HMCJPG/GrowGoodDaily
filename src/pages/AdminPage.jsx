@@ -284,6 +284,11 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
   const [socialImage, setSocialImage] = useState(existingPost?.socialImage || '');
   const [author, setAuthor] = useState(existingPost?.author || '');
   const [authorUrl, setAuthorUrl] = useState(existingPost?.authorUrl || '');
+  const [publishedDate, setPublishedDate] = useState(
+    existingPost?.publishedDate
+      ? existingPost.publishedDate.slice(0, 10)
+      : new Date().toISOString().slice(0, 10),
+  );
   const [saving, setSaving] = useState(false);
   const [loadingPost, setLoadingPost] = useState(isEditing);
   const [uploadingImage, setUploadingImage] = useState(false);
@@ -440,8 +445,18 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
   }
 
   const handleBold = () => wrapSelection('**', '**', 'bold text');
-  const handleItalic = () => wrapSelection('*', '*', 'italic text');
+  // Use <em> instead of *…* — markdown asterisks fail mid-word and conflict
+  // with bold's ** runs, so we emit HTML to make italic always reliable.
+  const handleItalic = () => wrapSelection('<em>', '</em>', 'italic text');
   const handleUnderline = () => wrapSelection('<u>', '</u>', 'underlined text');
+
+  function handleLink() {
+    const url = window.prompt('Enter the URL (e.g., https://example.com):');
+    if (!url) return;
+    const trimmed = url.trim();
+    if (!trimmed) return;
+    wrapSelection('[', `](${trimmed})`, 'link text');
+  }
 
   function handleFontChange(font) {
     if (!font) return;
@@ -591,6 +606,12 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
         noIndex,
         author,
         authorUrl,
+        // Convert the YYYY-MM-DD date input back to a full ISO timestamp,
+        // anchored at noon local time so the date displays the same in
+        // most timezones.
+        publishedDate: publishedDate
+          ? new Date(`${publishedDate}T12:00:00`).toISOString()
+          : undefined,
       };
 
       const url = isEditing ? `${API_BASE}/${existingPost.slug}` : API_BASE;
@@ -873,6 +894,23 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
           </div>
 
           <div className="admin__field">
+            <label className="admin__label" htmlFor="editor-publish-date">
+              Publish Date
+            </label>
+            <input
+              id="editor-publish-date"
+              className="admin__input"
+              type="date"
+              value={publishedDate}
+              onChange={(e) => setPublishedDate(e.target.value)}
+            />
+            <p className="admin__field-help">
+              Override the publication date shown on the post (and used in
+              SEO/structured data). Defaults to today.
+            </p>
+          </div>
+
+          <div className="admin__field">
             <label className="admin__label" htmlFor="editor-content">Content</label>
             <div
               className="admin__editor-toolbar"
@@ -919,6 +957,14 @@ function EditorView({ token, existingPost, onSaved, onCancel }) {
                 title="Underline (wraps selection in <u>)"
               >
                 <u>U</u>
+              </button>
+              <button
+                type="button"
+                className="admin__toolbar-btn"
+                onClick={handleLink}
+                title="Insert link — wraps selection in [text](url)"
+              >
+                🔗 Link
               </button>
 
               <span className="admin__toolbar-sep" aria-hidden="true" />

@@ -104,6 +104,7 @@ async function handlePost(req, res) {
     noIndex = false,
     author = '',
     authorUrl = '',
+    publishedDate: customPublishedDate,
   } = req.body ?? {};
 
   if (!title) return res.status(400).json({ error: 'Title is required' });
@@ -142,7 +143,8 @@ async function handlePost(req, res) {
     noIndex,
     author,
     authorUrl,
-    publishedDate: now,
+    // Honor the manual override when supplied; otherwise stamp with now.
+    publishedDate: customPublishedDate || now,
     updatedDate: now,
   };
 
